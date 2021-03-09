@@ -1,0 +1,7 @@
+deno
+kconf
+neovim
+nodejs
+poetry
+python
+yarn

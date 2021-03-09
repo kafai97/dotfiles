@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -xuo
+
+xcode-select --install
+
+if ! command -v brew &>/dev/null; then
+  echo "Installing Homebrew"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+if [ ! -d $HOME/.oh-my-zsh ]; then
+  echo "Installing Oh My Zsh"
+  sh -c $(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
+fi
+
+if [ ! -f $HOME/.mackup.cfg ]; then
+  cp ./Mackup/.mackup.cfg $HOME/.mackup.cfg
+fi
+
+if [ ! -d $HOME/.mackup ]; then
+  cp -r ./Mackup/.mackup $HOME/.mackup
+fi
+
+brew bundle --cleanup --file $HOME/.dotfiles/Brewfile --no-lock
+
+mackup restore -f
+
+git submodule update --remote
+
+for package in $(cat $HOME/.dotfiles/asdf.txt); do asdf plugin-add "${package}"; done
+
+asdf install
+
+for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done
+
+for package in $(cat $HOME/.dotfiles/vscode-extension.txt); do code --install-extension "${package}"; done

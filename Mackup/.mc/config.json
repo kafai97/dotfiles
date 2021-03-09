@@ -1,0 +1,33 @@
+{
+  "version": "10",
+  "aliases": {
+    "gcs": {
+      "url": "https://storage.googleapis.com",
+      "accessKey": "YOUR-ACCESS-KEY-HERE",
+      "secretKey": "YOUR-SECRET-KEY-HERE",
+      "api": "S3v2",
+      "path": "dns"
+    },
+    "local": {
+      "url": "http://localhost:9000",
+      "accessKey": "admin",
+      "secretKey": "password",
+      "api": "s3v4",
+      "path": "auto"
+    },
+    "play": {
+      "url": "https://play.min.io",
+      "accessKey": "Q3AM3UQ867SPQQA43P2F",
+      "secretKey": "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG",
+      "api": "s3v4",
+      "path": "auto"
+    },
+    "s3": {
+      "url": "https://s3-ap-southeast-1.amazonaws.com",
+      "accessKey": "AKIA5Q4BLZMRG26IPZ4E",
+      "secretKey": "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",
+      "api": "S3v4",
+      "path": "dns"
+    }
+  }
+}

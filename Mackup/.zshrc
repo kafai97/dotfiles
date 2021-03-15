@@ -85,7 +85,7 @@ plugins=(
   git
   gitignore
   # git-flow
-  helm
+  # helm
   # httpie
   kubectl
   npm
@@ -100,6 +100,8 @@ plugins=(
 
   argocd
   fast-syntax-highlighting
+  hasura
+  helmfile
   gh
   glooctl
   k3d
@@ -145,7 +147,7 @@ source $ZSH/oh-my-zsh.sh
 alias src="source ~/.zshrc"
 alias codez="code ~/.zshrc"
 
-# alias ls='exa --all --long --git --sort=type'
+alias ls='exa --all --long --git --sort=type'
 alias cat="bat --plain"
 alias rm="rm -rvi"
 
@@ -156,7 +158,7 @@ alias p="poetry"
 alias dk="docker"
 alias ldk='lazydocker'
 alias lg='lazygit'
-alias degit="npx degit --mode=git"
+alias degit="npx degit"
 alias tf='terraform'
 alias linode='linode-cli'
 
@@ -177,4 +179,3 @@ export KUBE_EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-

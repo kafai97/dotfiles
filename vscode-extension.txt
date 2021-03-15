@@ -24,7 +24,6 @@ HookyQR.beautify
 humao.rest-client
 infinity1207.angular2-switcher
 ipedrazas.kubernetes-snippets
-joelday.docthis
 mads-hartmann.bash-ide-vscode
 mhutchie.git-graph
 miguelsolorio.fluent-icons

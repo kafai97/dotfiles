@@ -11,8 +11,6 @@ brew "argocd"
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Command-line interface for SQLite
-brew "sqlite"
 # Modern replacement for 'ls'
 brew "exa"
 # Command-line fuzzy finder written in Go
@@ -23,8 +21,6 @@ brew "gh"
 brew "glooctl"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# OpenType text shaping engine
-brew "harfbuzz"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Kubernetes package manager
@@ -53,6 +49,8 @@ brew "pipx"
 brew "ripgrep"
 # Tool to build, change, and version infrastructure
 brew "terraform"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
 brew "knative/client/kn"
 # Tekton CLI - The command line interface for interacting with Tekton
 brew "tektoncd/tools/tektoncd-cli"

@@ -1,3 +1,4 @@
+tap "civo/tools"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -51,6 +52,8 @@ brew "ripgrep"
 brew "terraform"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Process YAML documents from the CLI
+brew "yq"
 brew "knative/client/kn"
 # Tekton CLI - The command line interface for interacting with Tekton
 brew "tektoncd/tools/tektoncd-cli"

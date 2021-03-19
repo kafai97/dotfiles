@@ -114,6 +114,7 @@ plugins=(
   poetry
   rio
   tkn
+  yq
   zsh-autosuggestions
 )
 

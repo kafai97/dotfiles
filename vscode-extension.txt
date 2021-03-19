@@ -41,6 +41,7 @@ njpwerner.autodocstring
 nrwl.angular-console
 oderwat.indent-rainbow
 Orta.vscode-jest
+pflannery.vscode-versionlens
 PKief.material-icon-theme
 Prisma.prisma
 PulkitGangwar.nextjs-snippets

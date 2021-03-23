@@ -1,4 +1,5 @@
 tap "civo/tools"
+tap "dapr/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -54,6 +55,8 @@ brew "terraform"
 brew "tree"
 # Process YAML documents from the CLI
 brew "yq"
+# Client for Dapr.
+brew "dapr/tap/dapr-cli"
 brew "knative/client/kn"
 # Tekton CLI - The command line interface for interacting with Tekton
 brew "tektoncd/tools/tektoncd-cli"

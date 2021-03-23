@@ -109,7 +109,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "cSpell.enabled": true,
   "workbench.colorTheme": "One Dark Pro",
-  "workbench.productIconTheme": "fluent-icons",
   "workbench.editorAssociations": [
     {
       "viewType": "jupyter.notebook.ipynb",

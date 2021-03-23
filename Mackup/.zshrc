@@ -99,6 +99,7 @@ plugins=(
   yarn
 
   argocd
+  dapr
   fast-syntax-highlighting
   hasura
   helmfile

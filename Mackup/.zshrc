@@ -100,6 +100,7 @@ plugins=(
 
   argocd
   dapr
+  faas-cli
   fast-syntax-highlighting
   hasura
   helmfile
@@ -108,6 +109,7 @@ plugins=(
   k3d
   kconf
   kn
+  kubeless
   linode
   mc
   pdm

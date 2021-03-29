@@ -15,6 +15,8 @@ brew "asdf"
 brew "bat"
 # Modern replacement for 'ls'
 brew "exa"
+# CLI for templating and/or deploying FaaS functions
+brew "faas-cli"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -37,6 +39,8 @@ brew "k3d"
 brew "k9s"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
+# Kubernetes Native Serverless Framework
+brew "kubeless"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands

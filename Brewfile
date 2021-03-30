@@ -86,6 +86,8 @@ cask "microsoft-teams"
 cask "notion"
 # Tool to create and manage Outline servers, powered by Shadowsocks
 cask "outline-manager"
+# GUI client for PostgreSQL databases
+cask "postico"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Video chat, voice call and instant messaging application

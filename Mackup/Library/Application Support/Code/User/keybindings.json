@@ -62,5 +62,45 @@
   {
     "key": "cmd+k cmd+j",
     "command": "workbench.action.toggleMaximizedPanel"
+  },
+  {
+    "key": "alt+j",
+    "command": "block-travel.jumpDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+down",
+    "command": "-block-travel.jumpDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+k",
+    "command": "block-travel.jumpUp",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "alt+up",
+    "command": "-block-travel.jumpUp",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+j",
+    "command": "block-travel.selectDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+down",
+    "command": "-block-travel.selectDown",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+k",
+    "command": "block-travel.selectUp",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+up",
+    "command": "-block-travel.selectUp",
+    "when": "editorTextFocus"
   }
 ]

@@ -82,18 +82,18 @@ plugins=(
   deno
   docker
   docker-compose
+  dotnet
   fzf
   git
   gitignore
   # git-flow
-  # helm
+  helm
   # httpie
   kubectl
   npm
   pip
   python
   terraform
-  # virtualenvwrapper
   vscode
   web-search
   wd

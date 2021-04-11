@@ -3,7 +3,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.indent": 16,
   "material-icon-theme.hidesExplorerArrows": true,
-  "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+  // "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "editor.fontFamily": "FiraCodeNerdFontComplete-Retina",
   "editor.fontLigatures": true,
   "editor.minimap.enabled": false,
@@ -96,7 +96,6 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
-  "cSpell.userWords": ["nestjs"],
   "prettier.printWidth": 120,
   "prettier.arrowParens": "avoid",
   "prettier.semi": false,
@@ -108,7 +107,6 @@
   "python.formatting.provider": "black",
   "diffEditor.ignoreTrimWhitespace": false,
   "cSpell.enabled": true,
-  "workbench.colorTheme": "One Dark Pro",
   "workbench.editorAssociations": [
     {
       "viewType": "jupyter.notebook.ipynb",

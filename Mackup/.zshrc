@@ -1,4 +1,5 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+#
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -153,7 +154,8 @@ alias codez="code ~/.zshrc"
 
 alias ls='exa --all --long --git --sort=type'
 alias cat="bat --plain"
-alias rm="rm -rvi"
+alias c="bat --plain"
+alias rm="rm -ri"
 
 alias vim="nvim"
 alias vi="nvim"

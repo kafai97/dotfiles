@@ -13,6 +13,8 @@ brew "argocd"
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Command-line interface for SQLite
+brew "sqlite"
 # Modern replacement for 'ls'
 brew "exa"
 # CLI for templating and/or deploying FaaS functions
@@ -25,6 +27,8 @@ brew "gh"
 brew "glooctl"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Kubernetes package manager

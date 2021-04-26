@@ -25,10 +25,11 @@ brew bundle --cleanup --file $HOME/.dotfiles/Brewfile --no-lock
 
 mackup restore -f
 
+git submodule init
 git submodule update --remote
 
 for package in $(cat $HOME/.dotfiles/asdf.txt); do asdf plugin-add "${package}"; done
 
 asdf install
 
-for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done
+# for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done

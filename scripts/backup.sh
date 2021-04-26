@@ -7,7 +7,7 @@ brew bundle dump --describe --force
 
 asdf plugin-list | tee $HOME/.dotfiles/asdf.txt
 
-/bin/ls -1 ~/.local/pipx/venvs | tee $HOME/.dotfiles/pipx.txt
+# /bin/ls -1 ~/.local/pipx/venvs | tee $HOME/.dotfiles/pipx.txt
 
 git submodule update --remote
 

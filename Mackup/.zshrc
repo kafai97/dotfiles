@@ -99,25 +99,25 @@ plugins=(
   wd
   yarn
 
-  argocd
+  # argocd
   dapr
-  faas-cli
+  # faas-cli
   fast-syntax-highlighting
-  hasura
+  # hasura
   helmfile
   gh
-  glooctl
+  # glooctl
   k3d
   kconf
-  kn
-  kubeless
-  linode
-  mc
-  pdm
+  # kn
+  # kubeless
+  # linode
+  # mc
+  # pdm
   pipx
   poetry
-  rio
-  tkn
+  # rio
+  # tkn
   yq
   zsh-autosuggestions
 )

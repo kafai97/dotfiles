@@ -4,5 +4,4 @@ neovim
 nodejs
 poetry
 python
-rust
 yarn

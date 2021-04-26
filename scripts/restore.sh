@@ -33,3 +33,5 @@ for package in $(cat $HOME/.dotfiles/asdf.txt); do asdf plugin-add "${package}";
 asdf install
 
 # for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done
+
+defaults write -g ApplePressAndHoldEnabled -bool false

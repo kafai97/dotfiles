@@ -1,17 +1,15 @@
 # This is Git's per-user configuration file.
 [user]
-	name = kafai
-	email = lamkafai1997@gmail.com
-[includeIf "gitdir:~/Repositories/atal/"]
-  path = .gitconfig-atal
+name = kafai
+email = lamkafai1997@gmail.com
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
 [core]
-	# editor = nvim
-	editor = code --wait
+# editor = nvim
+editor = code --wait
 
 [pull]
-	rebase = true
+rebase = true

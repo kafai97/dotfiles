@@ -1,14 +1,9 @@
-tap "civo/tools"
 tap "dapr/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
-tap "knative/client"
-tap "tektoncd/tools"
-# GitOps Continuous Delivery for Kubernetes
-brew "argocd"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -23,8 +18,6 @@ brew "faas-cli"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Envoy-Powered API Gateway
-brew "glooctl"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # OpenType text shaping engine
@@ -35,24 +28,18 @@ brew "graphviz"
 brew "helm"
 # Deploy Kubernetes Helm Charts
 brew "helmfile"
-# Istio configuration command-line utility
-brew "istioctl"
 # Little helper to run Rancher Lab's k3s in Docker
 brew "k3d"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
-# Kubernetes Native Serverless Framework
-brew "kubeless"
 # Lazier way to manage everything docker
 brew "lazydocker"
 # Simple terminal UI for git commands
 brew "lazygit"
 # Keep your Mac's application settings in sync
 brew "mackup"
-# Replacement for ls, cp and other commands for object storage
-brew "minio-mc"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Search tool like grep and The Silver Searcher
@@ -65,9 +52,6 @@ brew "tree"
 brew "yq"
 # Client for Dapr.
 brew "dapr/tap/dapr-cli"
-brew "knative/client/kn"
-# Tekton CLI - The command line interface for interacting with Tekton
-brew "tektoncd/tools/tektoncd-cli"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
 # App to build and share containerized applications and microservices
@@ -83,13 +67,9 @@ cask "google-chrome"
 cask "iterm2"
 # Keyboard customizer
 cask "karabiner-elements"
-# Kubernetes IDE
-cask "lens"
 cask "microsoft-teams"
 # App to write, plan, collaborate, and get organized
 cask "notion"
-# Tool to create and manage Outline servers, powered by Shadowsocks
-cask "outline-manager"
 # GUI client for PostgreSQL databases
 cask "postico"
 # Move and resize windows using keyboard shortcuts or snap areas
@@ -102,5 +82,3 @@ cask "telegram"
 cask "typora"
 # Open-source code editor
 cask "visual-studio-code"
-# Desktop client for WhatsApp
-cask "whatsapp"

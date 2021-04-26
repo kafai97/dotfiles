@@ -5,4 +5,3 @@ python 3.8.6
 poetry 1.1.4
 yarn 1.22.10
 neovim nightly
-rust nightly

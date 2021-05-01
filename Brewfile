@@ -22,6 +22,8 @@ brew "gh"
 brew "gnupg"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Kubernetes package manager
@@ -44,10 +46,14 @@ brew "mackup"
 brew "pipx"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Feature-rich console based todo list manager
+brew "task"
 # Tool to build, change, and version infrastructure
 brew "terraform"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# HTTP benchmarking tool
+brew "wrk"
 # Process YAML documents from the CLI
 brew "yq"
 # Client for Dapr.

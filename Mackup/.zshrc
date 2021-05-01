@@ -79,6 +79,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   asdf
+  az
   deno
   docker
   docker-compose
@@ -93,11 +94,14 @@ plugins=(
   npm
   pip
   python
+  taskwarrior
   terraform
   vscode
   web-search
   wd
   yarn
+  zsh-interactive-cd
+  zsh_reload
 
   # argocd
   dapr
@@ -111,9 +115,9 @@ plugins=(
   kconf
   # kn
   # kubeless
-  # linode
+  linode
   # mc
-  # pdm
+  pdm
   pipx
   poetry
   # rio
@@ -121,6 +125,7 @@ plugins=(
   yq
   zsh-autosuggestions
 )
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -149,7 +154,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias src="source ~/.zshrc"
+
 alias codez="code ~/.zshrc"
 
 alias ls='exa --all --long --git --sort=type'
@@ -172,13 +177,6 @@ alias asdfa="asdf plugin-add"
 alias asdfi="asdf install"
 alias asdfg="asdf global"
 alias asdfl="asdf local"
-
-# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/zlib/lib"
-# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/zlib/include"
-# export LDFLAGS="${LDFLAGS} -L/usr/local/opt/sqlite/lib"
-# export CPPFLAGS="${CPPFLAGS} -I/usr/local/opt/sqlite/include"
-# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/zlib/lib/pkgconfig"
-# export PKG_CONFIG_PATH="${PKG_CONFIG_PATH} /usr/local/opt/sqlite/lib/pkgconfig"
 
 export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim

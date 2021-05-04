@@ -1,0 +1,21 @@
+{
+  "settingsVersion": "1.66",
+  "exclusionRules": [],
+  "filterLinkHints": false,
+  "waitForEnterForFilteredHints": true,
+  "hideHud": false,
+  "keyMappings": "#map <c-x> restoreTab\n#map <c-f> LinkHints.activateModeToOpenInNewTab\n\n# map <c-p> togglePinTab",
+  "linkHintCharacters": "sadfjklewcmpgh",
+  "linkHintNumbers": "0123456789",
+  "newTabUrl": "https://www.google.com",
+  "nextPatterns": "next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "prev,previous,back,older,<,‹,←,«,≪,<<",
+  "regexFindMode": false,
+  "ignoreKeyboardLayout": true,
+  "scrollStepSize": 80,
+  "smoothScroll": true,
+  "grabBackFocus": true,
+  "searchEngines": "# w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s Amazon\n# qw: https://www.qwant.com/?q=%s Qwant",
+  "searchUrl": "https://www.google.com/search?q=",
+  "userDefinedLinkHintCss": "#vomnibar {\n  background-color: #444;\n  border: none;\n}\n#vomnibar input {\n  color: #fff;\n  background-color: #222;\n  border: none;\n}\n#vomnibar .vomnibarSearchArea {\n  background-color: #444;\n  border-bottom: 0px solid #444;\n}\n#vomnibar ul {\n  background-color: #444;\n  border-top: 1px solid #333;\n}\n#vomnibar li {\n  border-bottom: 1px solid #333;\n}\n#vomnibar li .vomnibarSource {\n  color: #ccc;\n}\n#vomnibar li em,\n#vomnibar li .vomnibarTitle {\n  color: #bbb;\n}\n#vomnibar li .vomnibarUrl {\n  color: #aaa;\n}\n#vomnibar li .vomnibarMatch {\n  color: #FFC542;\n}\n#vomnibar li .vomnibarTitle .vomnibarMatch {\n  color: #FFC542;\n}\n#vomnibar li.vomnibarSelected {\n  background-color: #222;\n}\n\ndiv.vimiumHUD .hud-find,\ndiv.vimiumHUD .vimiumHUDSearchArea {\n  background-color: #444;\n  border: none\n}\ndiv.vimiumHUD span#hud-find-input,\ndiv.vimiumHUD .vimiumHUDSearchAreaInner {\n  color: #fff;\n}"
+}

@@ -1,7 +1,7 @@
 deno 1.7.4
 kconf 1.9.0
 nodejs 15.9.0
-python 3.8.6
+python 3.8.10
 poetry 1.1.4
 yarn 1.22.10
 neovim nightly

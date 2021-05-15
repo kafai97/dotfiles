@@ -24,9 +24,9 @@ set softtabstop=2
 set shiftwidth=2
 
 set ignorecase
-set smartcase
+" set smartcase
 set incsearch
 set iskeyword+=-
 
-let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.18/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.7.10/bin/python'
+" let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.18/bin/python'
+let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.10/bin/python'

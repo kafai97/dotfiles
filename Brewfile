@@ -60,6 +60,8 @@ brew "yq"
 brew "dapr/tap/dapr-cli"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
+# Cross platform SQL editor and database management app
+cask "beekeeper-studio"
 # App to build and share containerized applications and microservices
 cask "docker"
 # Web browser
@@ -76,8 +78,6 @@ cask "karabiner-elements"
 cask "microsoft-teams"
 # App to write, plan, collaborate, and get organized
 cask "notion"
-# GUI client for PostgreSQL databases
-cask "postico"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Video chat, voice call and instant messaging application

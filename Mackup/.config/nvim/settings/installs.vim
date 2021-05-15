@@ -7,8 +7,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
- Plug 'tomasiser/vim-code-dark'
-Plug 'christianchiarulli/nvcode-color-schemes.vim'
+Plug 'tomasiser/vim-code-dark'
 Plug 'nvim-treesitter/nvim-treesitter'
 
 Plug 'liuchengxu/vim-which-key'

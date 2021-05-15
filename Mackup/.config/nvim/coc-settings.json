@@ -1,6 +1,8 @@
 {
+  "coc.preferences.rootPatterns": [".git", ".hg", ".projections.json"],
   "python.venvPath": ".venv",
   "python.formatting.provider": "black",
+  "python.analysis.typeCheckingMode": "basic",
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableVimDevicons": true,
   "explorer.icon.enableNerdfont": true,

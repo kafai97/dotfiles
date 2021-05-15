@@ -11,17 +11,13 @@ let g:airline#extensions#tabline#enabled = 1
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ignore_install = { "haskell" }, -- List of parsers to ignore installing
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },  -- list of language that will be disabled
+    disable = { "c", "haskell" },  -- list of language that will be disabled
   },
 }
 EOF
-
-let g:nvcode_termcolors=256
-
-colorscheme nvcode " Or whatever colorscheme you make
-" colorscheme codedark
 
 " checks if your terminal has 24-bit color support
 if (has("termguicolors"))
@@ -29,4 +25,9 @@ if (has("termguicolors"))
     hi LineNr ctermbg=NONE guibg=NONE
 endif
 
- let g:airline_theme = 'codedark'
+colorscheme codedark
+let g:airline_theme = 'codedark'
+
+" let g:nvcode_termcolors=256
+" colorscheme nvcode
+

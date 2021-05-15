@@ -1,5 +1,7 @@
 .repo:~/Repositories
 betalabs:~/Repositories/betalabs
 demo:~/Repositories/demo
-projects:~/Repositories/projects
+dotfiles:~/.dotfiles
 home:~
+nvim:~/.config/nvim
+projects:~/Repositories/projects

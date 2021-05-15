@@ -96,6 +96,7 @@ plugins=(
   python
   taskwarrior
   terraform
+  # vi-mode
   vscode
   web-search
   wd
@@ -146,6 +147,11 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+setopt globdots
+export KUBECONFIG=$HOME/.kube/config
+export KUBE_EDITOR=nvim
+# VI_MODE_SET_CURSOR=true
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -177,9 +183,6 @@ alias asdfa="asdf plugin-add"
 alias asdfi="asdf install"
 alias asdfg="asdf global"
 alias asdfl="asdf local"
-
-export KUBECONFIG=$HOME/.kube/config
-export KUBE_EDITOR=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

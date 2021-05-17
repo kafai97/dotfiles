@@ -90,6 +90,8 @@ cask "obsidian"
 cask "outline-manager"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# GUI for streamlined Redis application development
+cask "redisinsight"
 # Video chat, voice call and instant messaging application
 cask "skype"
 # Messaging app with a focus on speed and security

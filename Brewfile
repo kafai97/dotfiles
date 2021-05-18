@@ -1,3 +1,4 @@
+tap "azure/functions"
 tap "dapr/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -12,8 +13,6 @@ brew "bat"
 brew "sqlite"
 # Modern replacement for 'ls'
 brew "exa"
-# CLI for templating and/or deploying FaaS functions
-brew "faas-cli"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
@@ -56,12 +55,18 @@ brew "tree"
 brew "wrk"
 # Process YAML documents from the CLI
 brew "yq"
+# Azure Functions Core Tools 3.0
+brew "azure/functions/azure-functions-core-tools@3"
 # Client for Dapr.
 brew "dapr/tap/dapr-cli"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
+# Data management tool that enables working with SQL Server
+cask "azure-data-studio"
 # Cross platform SQL editor and database management app
 cask "beekeeper-studio"
+# Desktop password and login vault
+cask "bitwarden"
 # App to build and share containerized applications and microservices
 cask "docker"
 # Web browser
@@ -75,9 +80,13 @@ cask "google-chrome"
 cask "iterm2"
 # Keyboard customizer
 cask "karabiner-elements"
+# Explorer for Azure Storage
+cask "microsoft-azure-storage-explorer"
 cask "microsoft-teams"
 # App to write, plan, collaborate, and get organized
 cask "notion"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Video chat, voice call and instant messaging application

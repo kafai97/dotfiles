@@ -163,7 +163,7 @@ export KUBE_EDITOR=nvim
 
 alias codez="code ~/.zshrc"
 
-alias ls='exa --all --long src--git --sort=type'
+alias ls='exa --all --long --git --sort=type'
 alias cat="bat --plain"
 alias c="bat --plain"
 alias rm="rm -ri"

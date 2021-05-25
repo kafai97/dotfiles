@@ -29,6 +29,8 @@ brew "graphviz"
 brew "helm"
 # Deploy Kubernetes Helm Charts
 brew "helmfile"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
 # Little helper to run Rancher Lab's k3s in Docker
 brew "k3d"
 # Kubernetes CLI To Manage Your Clusters In Style!
@@ -65,8 +67,6 @@ cask "alt-tab"
 cask "azure-data-studio"
 # Cross platform SQL editor and database management app
 cask "beekeeper-studio"
-# Desktop password and login vault
-cask "bitwarden"
 # App to build and share containerized applications and microservices
 cask "docker"
 # Web browser
@@ -87,6 +87,8 @@ cask "microsoft-teams"
 cask "notion"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Tool to create and manage Outline servers, powered by Shadowsocks
+cask "outline-manager"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # Video chat, voice call and instant messaging application

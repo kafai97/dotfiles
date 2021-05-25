@@ -1,6 +1,7 @@
 azure-cli
 cookiecutter
 httpie
+kube-shell
 linode-cli
 openapi-generator-cli
 pdm

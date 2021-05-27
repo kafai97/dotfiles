@@ -65,8 +65,6 @@ brew "dapr/tap/dapr-cli"
 cask "alt-tab"
 # Data management tool that enables working with SQL Server
 cask "azure-data-studio"
-# Cross platform SQL editor and database management app
-cask "beekeeper-studio"
 # App to build and share containerized applications and microservices
 cask "docker"
 # Web browser

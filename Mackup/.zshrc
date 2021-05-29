@@ -147,7 +147,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-setopt globdots
+# setopt globdots
 export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim
 # VI_MODE_SET_CURSOR=true
@@ -164,6 +164,7 @@ export KUBE_EDITOR=nvim
 alias codez="code ~/.zshrc"
 
 alias ls='exa --all --long --git --sort=type'
+alias l='exa --all --long --git --sort=type'
 alias cat="bat --plain"
 alias c="bat --plain"
 alias rm="rm -ri"

@@ -80,6 +80,7 @@ cask "iterm2"
 cask "karabiner-elements"
 # Explorer for Azure Storage
 cask "microsoft-azure-storage-explorer"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # App to write, plan, collaborate, and get organized
 cask "notion"

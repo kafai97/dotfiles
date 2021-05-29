@@ -79,12 +79,12 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   asdf
-  az
   deno
   docker
   docker-compose
   dotnet
   fzf
+  gh
   git
   gitignore
   # git-flow
@@ -105,12 +105,12 @@ plugins=(
   zsh_reload
 
   # argocd
+  az
   dapr
   # faas-cli
   fast-syntax-highlighting
   # hasura
   helmfile
-  gh
   # glooctl
   k3d
   kconf

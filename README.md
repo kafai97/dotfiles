@@ -5,13 +5,13 @@
 - Clone Repository
 
 ```sh
-git clone https://github.com/kafai97/dotfiles.git $HOME/.dotfiles
+git clone --recurse-submodules --remote-submodules https://github.com/kafai97/dotfiles.git $HOME/.dotfiles
 ```
 
-- Pull .dotfiles from git & Restore
+- Apply settings from dotfiles
 
 ```sh
-sh $HOME/.dotfiles/scripts/pull.sh
+sh $HOME/.dotfiles/scripts/restore.sh
 ```
 
 - Update .dotfiles & Push to git

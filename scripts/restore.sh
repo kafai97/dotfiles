@@ -11,7 +11,7 @@
 # @raycast.currentDirectoryPath ~/.dotfiles
 
 # Documentation:
-# @raycast.description apply settings from dotfies
+# @raycast.description apply settings from dotfiles
 # @raycast.author Fai
 # @raycast.authorURL https://github.com/kafai97
 

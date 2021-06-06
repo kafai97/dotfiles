@@ -1,4 +1,20 @@
 #!/usr/bin/env bash
+
+# Required parameters:
+# @raycast.schemaVersion 1
+# @raycast.title restore
+# @raycast.mode fullOutput
+
+# Optional parameters:
+# @raycast.icon 🤖
+# @raycast.packageName dotfiles
+# @raycast.currentDirectoryPath ~/.dotfiles
+
+# Documentation:
+# @raycast.description apply settings from dotfies
+# @raycast.author Fai
+# @raycast.authorURL https://github.com/kafai97
+
 set -xuo
 
 xcode-select --install

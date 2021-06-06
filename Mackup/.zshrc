@@ -122,6 +122,7 @@ plugins=(
   pipx
   poetry
   # rio
+  ssh
   # tkn
   yq
   zsh-autosuggestions

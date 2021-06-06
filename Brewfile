@@ -47,8 +47,6 @@ brew "mackup"
 brew "pipx"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Feature-rich console based todo list manager
-brew "task"
 # Tool to build, change, and version infrastructure
 brew "terraform"
 # Display directories as trees (with optional color/HTML output)
@@ -88,6 +86,8 @@ cask "notion"
 cask "obsidian"
 # Tool to create and manage Outline servers, powered by Shadowsocks
 cask "outline-manager"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
 # GUI for streamlined Redis application development

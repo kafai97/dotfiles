@@ -18,8 +18,8 @@ fnlock=$(defaults read -g com.apple.keyboard.fnState)
 echo $fnlock
 if [[ $fnlock = 1 ]]; then
   defaults write -g com.apple.keyboard.fnState -bool false
-  echo fnlock is on
+  echo fnlock is off
 else
   defaults write -g com.apple.keyboard.fnState -bool true
-  echo fnlock is off
+  echo fnlock is on
 fi

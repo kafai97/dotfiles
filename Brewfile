@@ -43,6 +43,8 @@ brew "lazydocker"
 brew "lazygit"
 # Keep your Mac's application settings in sync
 brew "mackup"
+# Simplistic interactive filtering tool
+brew "peco"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Search tool like grep and The Silver Searcher

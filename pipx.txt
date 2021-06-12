@@ -6,3 +6,4 @@ linode-cli
 openapi-generator-cli
 pdm
 piccolo
+ranger-fm

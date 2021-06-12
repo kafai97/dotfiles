@@ -101,7 +101,8 @@ plugins=(
   web-search
   wd
   yarn
-  zsh-interactive-cd
+  # zsh-interactive-cd
+  z
   zsh_reload
 
   # argocd
@@ -151,6 +152,7 @@ source $ZSH/oh-my-zsh.sh
 # setopt globdots
 export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim
+export EDITOR=nvim
 # VI_MODE_SET_CURSOR=true
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -164,8 +166,8 @@ export KUBE_EDITOR=nvim
 
 alias codez="code ~/.zshrc"
 
-alias ls='exa --all --long --git --sort=type'
-alias l='exa --all --long --git --sort=type'
+alias ls='exa --all --long --git --sort=type --icons'
+alias l='exa --all --long --git --sort=type --icons'
 alias cat="bat --plain"
 alias c="bat --plain"
 alias rm="rm -ri"

@@ -31,6 +31,7 @@ fi
 
 if [ ! -f $HOME/.mackup.cfg ]; then
   cp ./Mackup/.mackup.cfg $HOME/.mackup.cfg
+  cp -r ./Mackup/.mackup $HOME/.mackup
 fi
 
 if [ ! -d $HOME/.mackup ]; then

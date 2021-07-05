@@ -1,5 +1,4 @@
 tap "azure/functions"
-tap "dapr/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -59,8 +58,6 @@ brew "wrk"
 brew "yq"
 # Azure Functions Core Tools 3.0
 brew "azure/functions/azure-functions-core-tools@3"
-# Client for Dapr.
-brew "dapr/tap/dapr-cli"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
 # Data management tool that enables working with SQL Server
@@ -90,8 +87,6 @@ cask "obsidian"
 cask "outline-manager"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Move and resize windows using keyboard shortcuts or snap areas
-cask "rectangle"
 # GUI for streamlined Redis application development
 cask "redisinsight"
 # Video chat, voice call and instant messaging application

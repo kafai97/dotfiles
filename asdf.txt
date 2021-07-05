@@ -1,4 +1,5 @@
 deno
+golang
 kconf
 neovim
 nodejs

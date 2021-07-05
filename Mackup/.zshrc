@@ -8,6 +8,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -88,6 +89,7 @@ plugins=(
   git
   gitignore
   # git-flow
+  golang
   helm
   # httpie
   kubectl
@@ -112,9 +114,11 @@ plugins=(
   fast-syntax-highlighting
   # hasura
   helmfile
+  hermit
   # glooctl
   k3d
   kconf
+  kool
   # kn
   # kubeless
   linode
@@ -153,7 +157,8 @@ source $ZSH/oh-my-zsh.sh
 export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim
 export EDITOR=nvim
-# VI_MODE_SET_CURSOR=true
+export VISUAL=nvim;
+# export VI_MODE_SET_CURSOR=true
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

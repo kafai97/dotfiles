@@ -52,8 +52,6 @@ brew "ripgrep"
 brew "terraform"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# HTTP benchmarking tool
-brew "wrk"
 # Process YAML documents from the CLI
 brew "yq"
 # Azure Functions Core Tools 3.0

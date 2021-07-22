@@ -1,6 +1,6 @@
 #compdef poetry
 
-_poetry_50a827450cc3103f_complete()
+_poetry_485be8882ff5aa3d_complete()
 {
     local state com cur
 
@@ -131,5 +131,5 @@ _poetry_50a827450cc3103f_complete()
     esac
 }
 
-_poetry_50a827450cc3103f_complete "$@"
-compdef _poetry_50a827450cc3103f_complete /Users/fai/.asdf/installs/poetry/1.1.6/bin/poetry
+_poetry_485be8882ff5aa3d_complete "$@"
+compdef _poetry_485be8882ff5aa3d_complete /Users/lamkafai/.asdf/installs/poetry/1.1.7/venv/bin/poetry

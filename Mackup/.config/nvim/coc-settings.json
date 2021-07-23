@@ -4,7 +4,7 @@
   "python.formatting.provider": "black",
   "python.analysis.typeCheckingMode": "basic",
   "explorer.file.showHiddenFiles": true,
-  "explorer.icon.enableVimDevicons": true,
+  "explorer.icon.source": "vim-devicons",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": "content",
   "explorer.keyMappings.global": {

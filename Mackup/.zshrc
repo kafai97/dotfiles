@@ -157,7 +157,7 @@ source $ZSH/oh-my-zsh.sh
 export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim
 export EDITOR=nvim
-export VISUAL=nvim;
+export VISUAL=nvim
 # export VI_MODE_SET_CURSOR=true
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,

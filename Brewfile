@@ -46,6 +46,8 @@ brew "mackup"
 brew "peco"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
+# Object-relational database system
+brew "postgresql"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Tool to build, change, and version infrastructure

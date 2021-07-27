@@ -5,3 +5,5 @@ alias k3cd="k3d cluster delete"
 alias k3cls="k3d cluster list"
 alias k3con="k3d cluster start"
 alias k3coff="k3d cluster stop"
+
+eval "$(k3d completion zsh)"

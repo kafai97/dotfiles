@@ -1,0 +1,1 @@
+eval "$(dapr completion zsh)"

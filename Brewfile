@@ -20,6 +20,10 @@ brew "gh"
 brew "gnupg"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Library to render SVG files using Cairo
+brew "librsvg"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
 # Kubernetes package manager
 brew "helm"
 # Deploy Kubernetes Helm Charts

@@ -47,6 +47,8 @@ git submodule update --remote
 
 for package in $(cat $HOME/.dotfiles/asdf.txt); do asdf plugin-add "${package}"; done
 
+asdf plugin-update --all
+
 asdf install
 
 for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done

@@ -28,7 +28,7 @@ set incsearch
 set iskeyword+=-
 
 " let g:python_host_prog = $HOME . '/.asdf/installs/python/2.7.18/bin/python'
-let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.10/bin/python'
+" let g:python3_host_prog = $HOME . '/.asdf/installs/python/3.8.10/bin/python'
 
 set number relativenumber 
 augroup numbertoggle

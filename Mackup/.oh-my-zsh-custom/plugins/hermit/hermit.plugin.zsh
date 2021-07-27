@@ -22,5 +22,5 @@ precmd_functions+=(change_hermit_env)
 # shellcheck disable=SC2154
 if [[ -n ${_comps+x} ]]; then
   autoload -U +X bashcompinit && bashcompinit
-  complete -o nospace -C "$HOME/bin/hermit" hermit
+  complete -o nospace -C "$HOME/.local/bin/hermit" hermit
 fi

@@ -20,10 +20,6 @@ brew "gh"
 brew "gnupg"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Library to render SVG files using Cairo
-brew "librsvg"
-# Graph visualization software from AT&T and Bell Labs
-brew "graphviz"
 # Kubernetes package manager
 brew "helm"
 # Deploy Kubernetes Helm Charts
@@ -62,6 +58,8 @@ brew "azure/functions/azure-functions-core-tools@3"
 cask "alt-tab"
 # Data management tool that enables working with SQL Server
 cask "azure-data-studio"
+# Universal database tool and SQL client
+cask "dbeaver-community"
 # App to build and share containerized applications and microservices
 cask "docker"
 # Web browser

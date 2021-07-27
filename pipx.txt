@@ -1,6 +1,7 @@
 azure-cli
 cookiecutter
 databricks-cli
+django
 httpie
 linode-cli
 openapi-generator-cli

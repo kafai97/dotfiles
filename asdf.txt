@@ -3,6 +3,6 @@ golang
 kconf
 neovim
 nodejs
+pnpm
 poetry
 python
-yarn

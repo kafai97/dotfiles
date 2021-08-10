@@ -60,8 +60,6 @@ brew "yq"
 brew "azure/functions/azure-functions-core-tools@3"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
-# Data management tool that enables working with SQL Server
-cask "azure-data-studio"
 # Universal database tool and SQL client
 cask "dbeaver-community"
 # App to build and share containerized applications and microservices

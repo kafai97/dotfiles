@@ -1,1 +1,1 @@
-eval "$(dapr completion zsh)"
+export PATH=$PATH:${HOME}/.dapr/bin

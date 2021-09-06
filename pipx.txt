@@ -8,3 +8,4 @@ openapi-generator-cli
 pdm
 pipenv
 ranger-fm
+streamlit

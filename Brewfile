@@ -16,6 +16,8 @@ brew "exa"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Extensions to follow Vincent Driessen's branching model
+brew "git-flow"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # OpenType text shaping engine
@@ -42,8 +44,6 @@ brew "lazydocker"
 brew "lazygit"
 # Keep your Mac's application settings in sync
 brew "mackup"
-# Simplistic interactive filtering tool
-brew "peco"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Object-relational database system

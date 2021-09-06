@@ -81,6 +81,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 plugins=(
   asdf
   deno
+  django
   docker
   docker-compose
   dotnet
@@ -88,21 +89,22 @@ plugins=(
   gh
   git
   gitignore
-  # git-flow
+  git-flow
   golang
   helm
-  # httpie
+  httpie
   kubectl
+  ng
   npm
   pip
   python
-  taskwarrior
+  # taskwarrior
   terraform
   # vi-mode
   vscode
   web-search
   wd
-  # yarn
+  yarn
   # zsh-interactive-cd
   z
   zsh_reload
@@ -113,7 +115,7 @@ plugins=(
   dapr
   # faas-cli
   fast-syntax-highlighting
-  # hasura
+  hasura
   helmfile
   hermit
   # glooctl

@@ -1,4 +1,5 @@
 azure-cli
+celery
 cookiecutter
 databricks-cli
 django
@@ -6,6 +7,7 @@ httpie
 linode-cli
 openapi-generator-cli
 pdm
+piccolo
 pipenv
 ranger-fm
 streamlit

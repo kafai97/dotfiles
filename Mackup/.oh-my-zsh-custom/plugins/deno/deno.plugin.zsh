@@ -1,1 +1,0 @@
-eval "$(deno completions zsh)"

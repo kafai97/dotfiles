@@ -1,1 +1,0 @@
-eval "$(hasura completion zsh)"

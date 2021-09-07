@@ -38,6 +38,8 @@ if [ ! -d $HOME/.mackup ]; then
   cp -r ./Mackup/.mackup $HOME/.mackup
 fi
 
+defaults write -g ApplePressAndHoldEnabled -bool false
+
 brew bundle --cleanup --file $HOME/.dotfiles/Brewfile --no-lock
 
 mackup restore -f
@@ -53,5 +55,4 @@ asdf install
 
 for package in $(cat $HOME/.dotfiles/pipx.txt); do pipx install "${package}"; done
 
-defaults write -g ApplePressAndHoldEnabled -bool false
-
+sh $HOME/.dotfiles/scripts/install_extra.sh

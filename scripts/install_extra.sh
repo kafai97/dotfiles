@@ -2,10 +2,25 @@
 
 set -xuo
 
-export HERMIT_BIN_INSTALL_DIR=${HOME}/.local/bin
+BIN_DIR=$HOME/.local/bin
 
-curl -fsSL https://github.com/cashapp/hermit/releases/download/stable/install.sh | /bin/bash
+if ! command -v dapr &>/dev/null; then
+  curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR=$BIN_DIR sh
+fi
 
-export DAPR_INSTALL_DIR=${HOME}/.local/bin
+if ! command -v hermit &>/dev/null; then
+  curl -fsSL https://github.com/cashapp/hermit/releases/download/stable/install.sh | HERMIT_BIN_INSTALL_DIR=$BIN_DIR sh
+fi
 
-curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | /bin/bash
+if ! command -v hasura &>/dev/null; then
+  curl -fsSL https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | INSTALL_PATH=$BIN_DIR sh
+fi
+
+if ! command -v kool &>/dev/null; then
+  curl -fsSL https://kool.dev/install | BIN_PATH=$BIN_DIR/kool sh
+fi
+
+if ! command -v kubectl-crossplane &>/dev/null; then
+  cd $BIN_DIR
+  curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
+fi

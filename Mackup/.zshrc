@@ -110,25 +110,27 @@ plugins=(
   z
   zsh_reload
 
+  aliases
   # argocd
   az
   brew
   dapr
   # faas-cli
   fast-syntax-highlighting
+  # glooctl
   hasura
   helmfile
   hermit
-  # glooctl
   k3d
   kconf
-  kool
   # kn
+  kool
   # kubeless
   linode
   # mc
   pdm
   pipx
+  pnpm
   poetry
   # rio
   ssh
@@ -162,7 +164,6 @@ export KUBECONFIG=$HOME/.kube/config
 export KUBE_EDITOR=nvim
 export EDITOR=nvim
 export VISUAL=nvim
-# export VI_MODE_SET_CURSOR=true
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -172,30 +173,6 @@ export VISUAL=nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias codez="code ~/.zshrc"
-
-alias ls='exa --all --long --git --sort=type --icons'
-alias l='exa --all --long --git --sort=type --icons'
-alias cat="bat --plain"
-alias c="bat --plain"
-alias rm="rm -ri"
-
-alias vim="nvim"
-alias vi="nvim"
-alias py="python"
-alias p="poetry"
-alias dk="docker"
-alias ldk='lazydocker'
-alias lg='lazygit'
-alias degit="npx degit"
-alias tf='terraform'
-alias linode='linode-cli'
-
-alias asdfa="asdf plugin-add"
-alias asdfi="asdf install"
-alias asdfg="asdf global"
-alias asdfl="asdf local"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

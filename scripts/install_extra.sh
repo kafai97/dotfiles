@@ -4,12 +4,12 @@ set -xuo
 
 BIN_DIR=$HOME/.local/bin
 
-if ! command -v dapr &>/dev/null; then
-  curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR=$BIN_DIR sh
-fi
-
 if ! command -v hermit &>/dev/null; then
   curl -fsSL https://github.com/cashapp/hermit/releases/download/stable/install.sh | HERMIT_BIN_INSTALL_DIR=$BIN_DIR sh
+fi
+
+if ! command -v dapr &>/dev/null; then
+  curl -fsSL https://raw.githubusercontent.com/dapr/cli/master/install/install.sh | DAPR_INSTALL_DIR=$BIN_DIR sh
 fi
 
 if ! command -v hasura &>/dev/null; then
@@ -23,4 +23,9 @@ fi
 if ! command -v kubectl-crossplane &>/dev/null; then
   cd $BIN_DIR
   curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
+fi
+
+if command -v corepack &>/dev/null; then
+  corepack prepare --all
+  corepack enable --install-directory $BIN_DIR pnpm yarn
 fi

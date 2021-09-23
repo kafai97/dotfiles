@@ -80,7 +80,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   asdf
-  celery
+  # celery
   deno
   django
   docker
@@ -99,7 +99,6 @@ plugins=(
   npm
   pip
   python
-  # taskwarrior
   terraform
   # vi-mode
   vscode

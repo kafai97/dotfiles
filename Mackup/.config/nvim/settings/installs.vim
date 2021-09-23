@@ -21,6 +21,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'voldikss/vim-floaterm'
 Plug 'simeji/winresizer'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 

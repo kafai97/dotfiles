@@ -2,14 +2,19 @@
 [user]
 name = kafai
 email = lamkafai1997@gmail.com
+
 [filter "lfs"]
 required = true
 clean = git-lfs clean -- %f
 smudge = git-lfs smudge -- %f
 process = git-lfs filter-process
+
 [core]
-# editor = nvim
+editor = nvim
 editor = code --wait
 
 [pull]
 rebase = true
+
+[init]
+defaultBranch = master

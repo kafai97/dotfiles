@@ -17,7 +17,10 @@ alias degit="npx degit"
 alias tf='terraform'
 alias linode='linode-cli'
 
-alias asdfa="asdf plugin-add"
+alias asdfpa="asdf plugin-add"
+alias asdfprm="asdf plugin-remove"
 alias asdfi="asdf install"
+alias asdfu="asdf uninstall"
 alias asdfg="asdf global"
 alias asdfl="asdf local"
+alias asdfls="asdf list"

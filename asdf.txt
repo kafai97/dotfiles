@@ -1,7 +1,6 @@
 deno
 golang
 kconf
-neovim
 nodejs
 poetry
 python

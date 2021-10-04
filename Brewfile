@@ -4,6 +4,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "homebrew/services"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -16,14 +17,10 @@ brew "exa"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
-# Extensions to follow Vincent Driessen's branching model
-brew "git-flow"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Framework for layout and rendering of i18n text
-brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
 # Graph visualization software from AT&T and Bell Labs
@@ -46,6 +43,8 @@ brew "lazydocker"
 brew "lazygit"
 # Keep your Mac's application settings in sync
 brew "mackup"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Execute binaries from Python packages in isolated environments
 brew "pipx"
 # Object-relational database system
@@ -69,8 +68,8 @@ cask "docker"
 # Web browser
 cask "firefox"
 cask "font-fira-code-nerd-font"
-# Desktop client for GitHub repositories
-cask "github"
+# Git client focusing on productivity
+cask "gitkraken"
 # Web browser
 cask "google-chrome"
 # Terminal emulator as alternative to Apple's Terminal app

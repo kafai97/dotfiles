@@ -17,6 +17,8 @@ brew "exa"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# AVH edition of git-flow
+brew "git-flow-avh"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # OpenType text shaping engine

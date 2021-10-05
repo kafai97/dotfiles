@@ -40,6 +40,8 @@ fi
 
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+defaults write com.apple.dock "tilesize" -int "48" && killall Dock
+
 brew bundle --cleanup --file $HOME/.dotfiles/Brewfile --no-lock
 
 mackup restore -f

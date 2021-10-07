@@ -8,6 +8,7 @@ alias rm="rm -ri"
 
 alias vim="nvim"
 alias vi="nvim"
+alias gcz="npx --no-install git-cz"
 alias py="python"
 alias p="poetry"
 alias dk="docker"

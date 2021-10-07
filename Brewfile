@@ -70,8 +70,6 @@ cask "docker"
 # Web browser
 cask "firefox"
 cask "font-fira-code-nerd-font"
-# Git client focusing on productivity
-cask "gitkraken"
 # Web browser
 cask "google-chrome"
 # Terminal emulator as alternative to Apple's Terminal app
@@ -94,6 +92,8 @@ cask "raycast"
 cask "redisinsight"
 # Video chat, voice call and instant messaging application
 cask "skype"
+# Graphical client for Git version control
+cask "sourcetree"
 # Messaging app with a focus on speed and security
 cask "telegram"
 # Configurable document editor that supports Markdown

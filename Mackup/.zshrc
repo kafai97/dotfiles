@@ -111,7 +111,6 @@ plugins=(
   yarn
   # zsh-interactive-cd
   z
-  zsh_reload
 
   aliases
   # argocd

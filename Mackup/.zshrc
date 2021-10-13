@@ -94,7 +94,7 @@ plugins=(
   gh
   git
   gitignore
-  git-flow
+  git-flow-avh
   golang
   helm
   httpie

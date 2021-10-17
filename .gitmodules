@@ -7,3 +7,6 @@
 [submodule "Mackup/.oh-my-zsh-custom/themes/powerlevel10k"]
 	path = Mackup/.oh-my-zsh-custom/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "Mackup/.oh-my-zsh-custom/plugins/zsh-vi-mode"]
+	path = Mackup/.oh-my-zsh-custom/plugins/zsh-vi-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode

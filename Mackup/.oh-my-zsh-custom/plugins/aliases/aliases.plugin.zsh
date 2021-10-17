@@ -1,4 +1,5 @@
 alias codez="code ~/.zshrc"
+alias vimz="vim ~/.zshrc"
 
 alias ls='exa --all --long --git --sort=type --icons'
 alias l='exa --all --long --git --sort=type --icons'
@@ -6,8 +7,9 @@ alias cat="bat --plain"
 alias c="bat --plain"
 alias rm="rm -ri"
 
+alias nvim="lvim"
 alias vim="nvim"
-alias vi="nvim"
+alias vi="vim"
 alias gcz="npx --no-install git-cz"
 alias py="python"
 alias p="poetry"

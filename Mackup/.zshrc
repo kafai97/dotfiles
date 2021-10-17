@@ -139,6 +139,7 @@ plugins=(
   # tkn
   yq
   zsh-autosuggestions
+  zsh-vi-mode
 )
 
 
@@ -163,9 +164,7 @@ source $ZSH/oh-my-zsh.sh
 
 # setopt globdots
 export KUBECONFIG=$HOME/.kube/config
-export KUBE_EDITOR=nvim
-export EDITOR=nvim
-export VISUAL=nvim
+export KUBE_EDITOR=lvim
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

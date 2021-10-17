@@ -1,5 +1,7 @@
 azure-cli
+black
 celery
+commitizen
 cookiecutter
 databricks-cli
 django

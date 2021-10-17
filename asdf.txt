@@ -4,3 +4,4 @@ kconf
 nodejs
 poetry
 python
+rust

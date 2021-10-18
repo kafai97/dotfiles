@@ -29,3 +29,7 @@ if command -v corepack &>/dev/null; then
   corepack prepare --all
   corepack enable --install-directory $BIN_DIR pnpm yarn
 fi
+
+if ! command -v lvim &>/dev/null; then
+  curl -fsSL https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | sh -s -- --no-install-dependencies
+fi

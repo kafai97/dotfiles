@@ -3,5 +3,4 @@ betalabs:~/Repositories/betalabs
 demo:~/Repositories/demo
 dotfiles:~/.dotfiles
 home:~
-nvim:~/.config/nvim
 projects:~/Repositories/projects

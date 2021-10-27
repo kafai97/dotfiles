@@ -27,3 +27,6 @@ alias asdfu="asdf uninstall"
 alias asdfg="asdf global"
 alias asdfl="asdf local"
 alias asdfls="asdf list"
+
+alias gcnow="git commit -m \"regular update [$(date -u +%FT%TZ)]\""
+alias gfirst="git commit --allow-empty -m \"initial commit\""

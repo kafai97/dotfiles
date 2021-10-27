@@ -139,7 +139,7 @@ plugins=(
   # tkn
   yq
   zsh-autosuggestions
-  zsh-vi-mode
+  # zsh-vi-mode
 )
 
 

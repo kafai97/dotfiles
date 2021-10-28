@@ -1,7 +1,13 @@
+os:
+  openCommand: 'code -rg {{filename}}'
 customCommands:
   - key: "M"
     command: "git cz c"
     context: "files"
     loadingText: "opening commitizen commit tool"
     subprocess: true
+  - key: "N"
+    command: git commit -m "regular update [$(date -u +%FT%TZ)]"
+    context: "files"
+    loadingText: "commit with current time"
 

@@ -103,16 +103,16 @@ plugins=(
   npm
   pip
   python
+  sudo
   terraform
   # vi-mode
   vscode
-  web-search
+  # web-search
   wd
   yarn
   # zsh-interactive-cd
   z
 
-  aliases
   # argocd
   az
   brew
@@ -175,6 +175,43 @@ export KUBE_EDITOR=lvim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+dotenv() {
+  dotenv_file=${1:-.env}
+  set -a && source $dotenv_file && set +a
+}
+
+alias ls='exa --all --long --git --sort=type --icons'
+alias l='exa --all --long --git --sort=type --icons'
+alias cat="bat --plain"
+alias c="bat --plain"
+alias rm="rm -ri"
+
+alias vi="vim"
+alias vim="nvim"
+alias nvim="lvim"
+alias vimz="vim ~/.zshrc"
+alias codez="code ~/.zshrc"
+
+alias py="python"
+alias p="poetry"
+alias dk="docker"
+alias ldk='lazydocker'
+alias lg='lazygit'
+alias degit="npx degit"
+alias tf='terraform'
+alias linode='linode-cli'
+
+alias asdfpa="asdf plugin-add"
+alias asdfprm="asdf plugin-remove"
+alias asdfi="asdf install"
+alias asdfu="asdf uninstall"
+alias asdfg="asdf global"
+alias asdfl="asdf local"
+alias asdfls="asdf list"
+
+alias gcnow="git commit -m \"regular update [$(date -u +%FT%TZ)]\""
+alias gfirst="git commit --allow-empty -m \"initial commit\""
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -182,3 +219,4 @@ export KUBE_EDITOR=lvim
 # Please make sure this block is at the end of this file.
 [ -s ~/.fig/fig.sh ] && source ~/.fig/fig.sh
 #### END FIG ENV VARIABLES ####
+

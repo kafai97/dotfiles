@@ -11,6 +11,8 @@ brew "asdf"
 brew "bat"
 # Command-line interface for SQLite
 brew "sqlite"
+# General-purpose data compression with high compression ratio
+brew "xz"
 # Modern replacement for 'ls'
 brew "exa"
 # Command-line fuzzy finder written in Go

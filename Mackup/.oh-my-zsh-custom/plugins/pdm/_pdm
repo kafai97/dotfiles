@@ -1,6 +1,6 @@
 #compdef pdm
 
-PDM_PYTHON="/Users/fai/.local/pipx/venvs/pdm/bin/python"
+PDM_PYTHON="$HOME/.local/pipx/venvs/pdm/bin/python"
 PDM_PIP_INDEXES=($(command ${PDM_PYTHON} -m pdm config pypi.url))
 
 _pdm() {
@@ -68,6 +68,8 @@ _pdm() {
         "--no-self[Don't install the project itself]"
         {-u,--unconstrained}'[Ignore the version constraint of packages]'
         {-e+,--editable+}'[Specify editable packages]:packages'
+        "--no-isolation[do not isolate the build in a clean environment]"
+        "--dry-run[Show the difference only without modifying the lockfile content]"
         '*:packages:_pdm_pip_packages'
       )
       ;;
@@ -78,6 +80,7 @@ _pdm() {
         {-d+,--dest+}'[Target directory to put artifacts]:directory:_files -/'
         '--no-clean[Do not clean the target directory]'
         {-C,--config-setting}'[Pass options to the backend. options with a value must be specified after "=": "--config-setting=--opt(=value)" or "-C--opt(=value)"]'
+        "--no-isolation[do not isolate the build in a clean environment]"
       )
       ;;
     cache)
@@ -169,6 +172,8 @@ _pdm() {
         "--no-default[Don\'t include dependencies from the default group]"
         '--no-editalbe[Install non-editable versions for all packages]'
         "--no-self[Don't install the project itself]"
+        "--no-isolation[do not isolate the build in a clean environment]"
+        "--dry-run[Show the difference only without modifying the lockfile content]"
       )
       ;;
     list)
@@ -183,6 +188,7 @@ _pdm() {
     lock)
       arguments+=(
         {-g,--global}'[Use the global project, supply the project root with `-p` option]'
+        "--no-isolation[do not isolate the build in a clean environment]"
       )
       ;;
     plugin)
@@ -229,6 +235,8 @@ _pdm() {
         "--no-sync[Only write pyproject.toml and do not uninstall packages]"
         '--no-editalbe[Install non-editable versions for all packages]'
         "--no-self[Don't install the project itself]"
+        "--no-isolation[do not isolate the build in a clean environment]"
+        "--dry-run[Show the difference only without modifying the lockfile content]"
         "*:packages:_pdm_packages"
       )
       ;;
@@ -276,6 +284,7 @@ _pdm() {
         "--no-default[Don\'t include dependencies from the default group]"
         '--no-editalbe[Install non-editable versions for all packages]'
         "--no-self[Don't install the project itself]"
+        "--no-isolation[do not isolate the build in a clean environment]"
       )
       ;;
     update)
@@ -289,6 +298,7 @@ _pdm() {
         '--update-eager[Try to update the packages and their dependencies recursively]'
         '--no-editalbe[Install non-editable versions for all packages]'
         "--no-self[Don't install the project itself]"
+        "--no-sync[Only update lock file but do not sync packages]"
         {-u,--unconstrained}'[Ignore the version constraint of packages]'
         {-d,--dev}'[Select dev dependencies]'
         {--prod,--production}"[Unselect dev dependencies]"
@@ -296,6 +306,7 @@ _pdm() {
         {-t,--top}'[Only update those list in pyproject.toml]'
         "--dry-run[Show the difference only without modifying the lockfile content]"
         "--outdated[Show the difference only without modifying the lockfile content]"
+        "--no-isolation[do not isolate the build in a clean environment]"
         "*:packages:_pdm_packages"
       )
       ;;

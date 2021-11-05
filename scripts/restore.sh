@@ -77,10 +77,6 @@ if ! command -v kubectl-crossplane &>/dev/null; then
   curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
 fi
 
-if ! command -v lvim &>/dev/null; then
-  curl -fsSL https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh | sh -s -- --no-install-dependencies
-fi
-
 if command -v corepack &>/dev/null; then
   corepack prepare --all
   corepack enable --install-directory $BIN_DIR pnpm yarn

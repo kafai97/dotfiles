@@ -21,6 +21,8 @@ brew "fzf"
 brew "gh"
 # AVH edition of git-flow
 brew "git-flow-avh"
+# Git extension for versioning large files
+brew "git-lfs"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # OpenType text shaping engine

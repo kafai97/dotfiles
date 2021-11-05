@@ -1,6 +1,6 @@
 deno 1.15.0
-nodejs 16.11.1
-python 3.9.7
-poetry 1.1.9
+nodejs 17.0.1
+python 3.10.0
+poetry 1.1.11
 golang 1.17.2
 kconf 1.10.1

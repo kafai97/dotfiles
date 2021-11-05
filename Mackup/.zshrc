@@ -95,6 +95,7 @@ plugins=(
   git
   gitignore
   git-flow-avh
+  git-lfs
   golang
   helm
   httpie
@@ -128,7 +129,7 @@ plugins=(
   # kn
   kool
   # kubeless
-  linode
+  linode-cli
   # mc
   pdm
   pipx
@@ -180,6 +181,8 @@ dotenv() {
   set -a && source $dotenv_file && set +a
 }
 
+alias venv="source ./.venv/bin/activate"
+
 alias ls='exa --all --long --git --sort=type --icons'
 alias l='exa --all --long --git --sort=type --icons'
 alias cat="bat --plain"
@@ -199,7 +202,6 @@ alias ldk='lazydocker'
 alias lg='lazygit'
 alias degit="npx degit"
 alias tf='terraform'
-alias linode='linode-cli'
 
 alias asdfpa="asdf plugin-add"
 alias asdfprm="asdf plugin-remove"

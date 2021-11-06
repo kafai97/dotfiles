@@ -1,6 +1,6 @@
 [submodule "Mackup/.oh-my-zsh-custom/plugins/fast-syntax-highlighting"]
 	path = Mackup/.oh-my-zsh-custom/plugins/fast-syntax-highlighting
-	url = https://github.com/zdharma/fast-syntax-highlighting.git
+	url = https://github.com/zdharma-continuum/fast-syntax-highlighting.git
 [submodule "Mackup/.oh-my-zsh-custom/plugins/zsh-autosuggestions"]
 	path = Mackup/.oh-my-zsh-custom/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions

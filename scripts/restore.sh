@@ -19,9 +19,8 @@ set -xuo
 
 xcode-select --install
 
-cd ~/.dotfiles
-git submodule init
-git submodule update --remote
+git -C $HOME/.dotfiles submodule init
+git -C $HOME/dotfiles submodule update --remote
 
 if ! command -v brew &>/dev/null; then
   echo "Installing Homebrew"
@@ -78,6 +77,7 @@ if ! command -v kubectl-crossplane &>/dev/null; then
 fi
 
 if command -v corepack &>/dev/null; then
-  corepack prepare --all
   corepack enable --install-directory $BIN_DIR pnpm yarn
+  corepack prepare yarn@1.22.17 --activate
+  corepack prepare pnpm@6.20.2 --activate
 fi

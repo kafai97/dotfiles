@@ -1,5 +1,4 @@
 azure-cli
-celery
 commitizen
 cookiecutter
 databricks-cli

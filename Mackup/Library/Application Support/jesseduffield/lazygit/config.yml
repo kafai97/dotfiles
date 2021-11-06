@@ -6,8 +6,4 @@ customCommands:
     context: "files"
     loadingText: "opening commitizen commit tool"
     subprocess: true
-  - key: "N"
-    command: git commit -m "regular update [$(date -u +%FT%TZ)]"
-    context: "files"
-    loadingText: "commit with current time"
 

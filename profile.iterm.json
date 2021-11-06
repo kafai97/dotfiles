@@ -1,5 +1,5 @@
 {
-  "Working Directory" : "\/Users\/lamkafai\/Repositories",
+  "Working Directory" : "~\/Repositories",
   "Prompt Before Closing 2" : false,
   "Selected Text Color" : {
     "Green Component" : 0.94760049999999996,
@@ -130,7 +130,7 @@
     "Green Component" : 0.9268307089805603
   },
   "BM Growl" : true,
-  "AWDS Window Directory" : "\/Users\/lamkafai\/Repositories",
+  "AWDS Window Directory" : "~\/Repositories",
   "Ansi 3 Color" : {
     "Green Component" : 1,
     "Blue Component" : 0.71372550000000001,
@@ -154,7 +154,7 @@
   "Unlimited Scrollback" : false,
   "Custom Command" : "No",
   "AWDS Tab Option" : "Recycle",
-  "Title Components" : 2,
+  "Title Components" : 512,
   "Keyboard Map" : {
     "0xf728-0x80000" : {
       "Action" : 10,

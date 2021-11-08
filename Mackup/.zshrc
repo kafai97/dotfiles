@@ -118,6 +118,7 @@ plugins=(
   az
   brew
   dapr
+  dotfiles
   # faas-cli
   fast-syntax-highlighting
   # glooctl

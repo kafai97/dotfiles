@@ -1,4 +1,3 @@
-tap "azure/functions"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -9,8 +8,6 @@ tap "homebrew/services"
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Command-line interface for SQLite
-brew "sqlite"
 # Modern replacement for 'ls'
 brew "exa"
 # Command-line fuzzy finder written in Go
@@ -23,12 +20,6 @@ brew "git-flow-avh"
 brew "git-lfs"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
-# OpenType text shaping engine
-brew "harfbuzz"
-# Library to render SVG files using Cairo
-brew "librsvg"
-# Graph visualization software from AT&T and Bell Labs
-brew "graphviz"
 # Kubernetes package manager
 brew "helm"
 # Deploy Kubernetes Helm Charts
@@ -61,8 +52,6 @@ brew "terraform"
 brew "tree"
 # Process YAML documents from the CLI
 brew "yq"
-# Azure Functions Core Tools 3.0
-brew "azure/functions/azure-functions-core-tools@3"
 # Utility to set up alt-tab to switch between windows
 cask "alt-tab"
 # Universal database tool and SQL client

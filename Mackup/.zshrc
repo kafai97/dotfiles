@@ -211,7 +211,9 @@ alias asdfg="asdf global"
 alias asdfl="asdf local"
 alias asdfls="asdf list"
 
+
 alias gfirst="git commit --allow-empty -m \"initial commit\""
+alias gcnow="git commit -m \"regular update [$(gdate -u -Isecond)]\""
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

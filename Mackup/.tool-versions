@@ -1,7 +1,7 @@
-deno 1.15.0
+deno 1.15.3
 nodejs 17.0.1
 python 3.10.0
 poetry 1.1.11
-golang 1.17.2
-kconf 1.10.1
-rust 1.55.0
+golang 1.17.3
+kconf 1.11.0
+rust 1.56.1

@@ -1,1 +1,0 @@
-eval "$(kconf completion zsh)"

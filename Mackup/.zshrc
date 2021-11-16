@@ -89,6 +89,7 @@ plugins=(
   deno
   docker
   docker-compose
+  dotenv
   dotnet
   fzf
   gh

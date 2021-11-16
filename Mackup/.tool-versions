@@ -5,4 +5,3 @@ poetry 1.1.11
 golang 1.17.3
 kconf 1.11.0
 rust 1.56.1
-ruby 3.0.2

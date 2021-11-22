@@ -89,7 +89,8 @@ plugins=(
   deno
   docker
   docker-compose
-  dotenv
+  doctl
+  # dotenv
   dotnet
   fzf
   gh
@@ -193,8 +194,7 @@ alias c="bat --plain"
 alias rm="rm -ri"
 
 alias vi="vim"
-alias vim="nvim"
-alias nvim="lvim"
+alias vim="lvim"
 alias vimz="vim ~/.zshrc"
 alias codez="code ~/.zshrc"
 

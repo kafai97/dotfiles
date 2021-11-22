@@ -8,6 +8,8 @@ tap "homebrew/services"
 brew "asdf"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Command-line tool for DigitalOcean
+brew "doctl"
 # Modern replacement for 'ls'
 brew "exa"
 # Command-line fuzzy finder written in Go
@@ -52,7 +54,7 @@ brew "terraform"
 brew "tree"
 # Process YAML documents from the CLI
 brew "yq"
-# Utility to set up alt-tab to switch between windows
+# Enable Windows-like alt-tab
 cask "alt-tab"
 # Universal database tool and SQL client
 cask "dbeaver-community"

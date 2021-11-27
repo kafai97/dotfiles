@@ -6,6 +6,17 @@ email = lamkafai1997@gmail.com
 [core]
 editor = lvim
 
+[difftool]
+[diff]
+tool = lvim
+[difftool "lvim"]
+cmd = lvim -d $LOCAL $REMOTE
+
+[merge]
+tool = vscode
+[mergetool "vscode"]
+cmd = code --wait $MERGED
+
 [pull]
 rebase = true
 

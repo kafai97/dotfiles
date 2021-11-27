@@ -13,7 +13,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "map <c-f> LinkHints.activateModeToOpenInNewForegroundTab\nmap <a-f> LinkHints.activateModeToOpenIncognito\nmap <a-,> moveTabLeft count=99\nmap <a-.> moveTabRight count=99\nmap <m-j> passNextKey",
+  "keyMappings": "map F LinkHints.activateModeToOpenInNewForegroundTab\nmap <a-f> LinkHints.activateModeToOpenIncognito\nmap <a-,> moveTabLeft count=99\nmap <a-.> moveTabRight count=99\nmap <m-j> passNextKey",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "https://www.google.com/",

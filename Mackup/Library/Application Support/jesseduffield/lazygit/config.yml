@@ -1,7 +1,7 @@
 os:
   openCommand: code -rg {{filename}}
 customCommands:
-  - key: M
+  - key: C
     command: git cz c
     context: files
     loadingText: opening commitizen commit tool
@@ -10,3 +10,13 @@ customCommands:
     command: git commit -m "regular update [$(gdate -u -Isecond)]"
     context: files
     loadingText: git commit now with timestamp
+  - key: M
+    command: git mergetool {{ .SelectedFile.Name }}
+    context: files
+    loadingText: opening git mergetool
+    subprocess: true
+  - key: <c-p>
+    command: git remote prune {{.SelectedRemote.Name}}
+    context: remotes
+    loadingText: Pruning...
+    description: prune deleted remote branches

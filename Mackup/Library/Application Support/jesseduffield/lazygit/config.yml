@@ -15,8 +15,32 @@ customCommands:
     context: files
     loadingText: opening git mergetool
     subprocess: true
-  - key: <c-p>
+  - key: F
     command: git remote prune {{.SelectedRemote.Name}}
     context: remotes
     loadingText: Pruning...
     description: prune deleted remote branches
+  - key: O
+    command: gh pr create
+    context: status
+    loadingText: Creating pull request on GitHub
+    subprocess: true
+  - key: V
+    command: gh pr view --comments
+    context: status
+    loadingText: View pull request comments
+    subprocess: true
+  - key: W
+    command: gh pr view --web
+    context: status
+    loadingText: View pull request on GitHub
+  - key: E
+    command: gh pr edit
+    context: status
+    loadingText: Update pull request on GitHub
+    subprocess: true
+  - key: M
+    command: gh pr merge
+    context: global
+    loadingText: Merge pull request on GitHub
+    subprocess: true

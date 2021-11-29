@@ -106,7 +106,7 @@ plugins=(
   npm
   pip
   python
-  sudo
+  # sudo
   terraform
   # vi-mode
   vscode

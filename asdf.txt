@@ -1,8 +1,4 @@
-deno
-golang
 kconf
 nodejs
 poetry
 python
-ruby
-rust

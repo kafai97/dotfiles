@@ -1,0 +1,16 @@
+zmodule environment
+zmodule input
+zmodule zsh-users/zsh-completions
+zmodule completion
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-history-substring-search
+zmodule zdharma-continuum/fast-syntax-highlighting
+zmodule romkatv/powerlevel10k --use degit
+zmodule Aloxaf/fzf-tab
+zmodule agkozak/zsh-z
+zmodule $(brew --prefix asdf) --source asdf.sh
+zmodule $(brew --prefix fzf) --source shell/completion.zsh --source shell/key-bindings.zsh
+zmodule $XDG_CONFIG_HOME/zsh/plugins \
+  --source kubectl.plugin.zsh \
+  --source pipx.plugin.zsh \
+  --source az.plugin.zsh

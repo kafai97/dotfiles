@@ -1,0 +1,74 @@
+# Download zimfw script if missing.
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path
+path+=(~/.local/bin)
+fpath+=($ZDOTDIR/functions)
+
+# Zim module initialization
+ZSHZ_CMD=j
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+autoload -U bashcompinit && bashcompinit
+source ${ZIM_HOME}/init.zsh
+
+# Zsh configuration
+setopt CLOBBER
+bindkey -e
+WORDCHARS=${WORDCHARS/\/}
+
+# Environment variables
+export EDITOR="nvim"
+export VISUAL="nvim"
+export LESS="--QUIET --IGNORE-CASE --LONG-PROMPT --RAW-CONTROL-CHARS"
+export LESSOPEN="|sh ${XDG_CONFIG_HOME:-$HOME/.config}/less/lessfilter.sh %s"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_BUNDLE_NO_LOCK=1
+export HOMEBREW_BUNDLE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile"
+export GOKU_EDN_CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/karabiner/karabiner.edn"
+
+# Aliaes
+alias vim="nvim"
+alias zshrc="$EDITOR ~/.zshrc"
+alias cat="bat"
+alias ls="exa --all --group-directories-first"
+alias l="$aliases[ls] --long --icons --git"
+alias la="$aliases[l]"
+alias lst="$aliases[la] --tree --ignore-glob .git"
+alias tree='tree -a -I .git'
+alias lg="lazygit"
+alias ldk="lazydocker"
+alias py='python'
+alias pip="noglob pip"
+alias poetry="noglob poetry"
+alias p="poetry"
+alias y="yarn"
+alias ch="chezmoi"
+alias chcd="cd $(chezmoi source-path)"
+md() { [[ $# == 1 ]] && mkdir -p "$1" && cd "$1" }
+
+zmodload -F zsh/terminfo +p:terminfo
+if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
+  bindkey ${terminfo[kcuu1]} history-substring-search-up
+  bindkey ${terminfo[kcud1]} history-substring-search-down
+fi
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# Powerleve10k
+[[ -f ${ZDOTDIR:-${HOME}}/.p10k.zsh ]] && source ${ZDOTDIR:-${HOME}}/.p10k.zsh

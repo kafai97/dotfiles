@@ -1,0 +1,59 @@
+;; !  | means mandatory -   modifier(s) alone when pressend change behavior
+;; #  | means optional  -   modifiers are optional (but at least one necessary)
+
+;; C  | left_command
+;; T  | left_control
+;; O  | left_option
+;; S  | left_shift
+;; F  | fn
+;; Q  | right_command
+;; W  | right_control
+;; E  | right_option
+;; R  | right_shift
+
+{
+  :main [
+    {
+      :des "capslock => esc(click) / hyper(hold)"
+      :rules [[:##caps_lock :!QWEright_shift nil {:alone :escape}]]
+    }
+        {
+      :des "hyper + space => switch language"
+      :rules [[:!QWERspacebar :!Tspacebar]]
+    }
+    {
+      :des "hyper + hjkl => arrow keys"
+      :rules [
+        [:!QWER##j :##down_arrow]
+        [:!QWER##k :##up_arrow]
+        [:!QWER##h :##left_arrow]
+        [:!QWER##l :##right_arrow]
+      ]
+    }
+    {
+      :des "hyper + asdw => mouse movement"
+      :rules [
+        [:!QWERs {:mkey {:y 1600 :speed 2}}]
+        [:!QWERw {:mkey {:y -1600 :speed 2}}]
+        [:!QWERa {:mkey {:x -1600 :speed 2}}]
+        [:!QWERd {:mkey {:x 1600 :speed 2}}]
+      ]
+    }
+    {
+      :des "hyper + command + asdw => mouse wheel"
+      :rules [
+        [:!QWERCs {:mkey {:vwheel 64}}]
+        [:!QWERCw {:mkey {:vwheel -64}}]
+        [:!QWERCa {:mkey {:hwheel 64}}]
+        [:!QWERCd {:mkey {:hwheel -64}}]
+      ]
+    }
+    {
+      :des "hyper + return => mouse click"
+      :rules [
+        [:!QWERreturn_or_enter {:pkey :button1}]
+        [:!QWERCreturn_or_enter {:pkey :button2}]
+      ]
+    }
+  ]
+}

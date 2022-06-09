@@ -1,0 +1,101 @@
+# launcher mode
+:: launcher
+hyper - o ; launcher
+launcher < escape ; default
+
+launcher < f : open ~                                | skhd -k 'escape'
+launcher < t : open -n /Applications/iTerm.app       | skhd -k 'escape'
+launcher < n : open /System/Applications/Notes.app   | skhd -k 'escape'
+
+# yabai mode
+:: yabai
+hyper - f ; yabai
+yabai < escape ; default
+
+# focus window
+yabai < h : yabai -m window --focus west
+yabai < l : yabai -m window --focus east
+yabai < j : yabai -m window --focus south
+yabai < k : yabai -m window --focus north
+yabai < 0x29 : yabai -m window --focus recent
+
+# swap managed window
+yabai < cmd - h : yabai -m window --swap west
+yabai < cmd - l : yabai -m window --swap east
+yabai < cmd - j : yabai -m window --swap south
+yabai < cmd - k : yabai -m window --swap north
+
+# move managed window
+# shift + cmd - h : yabai -m window --warp east
+
+# set insertion point in yabaied container
+# ctrl + alt - h : yabai -m window --insert west
+
+# resize window size
+yabai < 0x18 : yabai -m window --resize left:-40:0 ; yabai -m window --resize right:40:0
+yabai < 0x1B : yabai -m window --resize left:40:0 ; yabai -m window --resize right:-40:0
+yabai < cmd - 0x18 : yabai -m window --resize top:0:-40 ; yabai -m window --resize bottom:0:40
+yabai < cmd - 0x1B : yabai -m window --resize top:0:40 ; yabai -m window --resize bottom:0:-40
+yabai < 0 : yabai -m space --balance
+yabai < cmd - 0:  yabai -m space --rotate 90
+
+# create and destroy desktop
+yabai < n : bash ~/.config/skhd/create_new_space.sh
+cmd + shift - w : bash ~/.config/skhd/close_current_space.sh
+
+# yabai desktop
+yabai < 1 : yabai -m query --spaces --space 1 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 2 : yabai -m query --spaces --space 2 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 3 : yabai -m query --spaces --space 3 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 4 : yabai -m query --spaces --space 4 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 5 : yabai -m query --spaces --space 5 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 6 : yabai -m query --spaces --space 6 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 7 : yabai -m query --spaces --space 7 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 8 : yabai -m query --spaces --space 8 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+yabai < 9 : yabai -m query --spaces --space 9 | jq -r '.windows[0] // empty' | xargs yabai -m window --focus
+
+# send window to desktop
+yabai < cmd - 1 : yabai -m window --space 1
+yabai < cmd - 2 : yabai -m window --space 2
+yabai < cmd - 3 : yabai -m window --space 3
+yabai < cmd - 4 : yabai -m window --space 4
+yabai < cmd - 5 : yabai -m window --space 5
+yabai < cmd - 6 : yabai -m window --space 6
+yabai < cmd - 7 : yabai -m window --space 7
+yabai < cmd - 8 : yabai -m window --space 8
+yabai < cmd - 9 : yabai -m window --space 9
+
+# yabai monitor
+yabai < 0x21 : yabai -m display --focus prev || yabai -m display --focus last
+yabai < 0x1E : yabai -m display --focus next || yabai -m display --focus first
+yabai < 0x2A : yabai -m display --focus recent
+
+# send window to monitor
+yabai < cmd - 0x21  : yabai -m window --display pre
+yabai < cmd - 0x1E  : yabai -m window --display next
+yabai < cmd - 0x2A  : yabai -m window --display recent
+
+# toggle managed window type
+yabai < f : yabai -m window --toggle zoom-fullscreen
+yabai < cmd - f : yabai -m window --toggle zoom-parent
+# yabai < cmd - z : yabai -m window --toggle native-fullscreen
+
+# change toggle type
+yabai < s : yabai -m window --toggle split
+yabai < x : yabai -m space --mirror x-axis
+yabai < y : yabai -m space --mirror y-axis
+
+# toggle floating window
+yabai < c : yabai -m window --toggle float ; yabai -m window --grid 1:5:1:1:3:1
+
+# floating window size
+yabai < down : yabai -m window --grid 1:5:1:1:3:1
+yabai < up : yabai -m window --grid 1:1:0:0:1:1
+yabai < left : yabai -m window --grid 1:2:0:0:1:1
+yabai < right : yabai -m window --grid 1:2:1:0:1:1
+
+# move floating window
+yabai < cmd - down : yabai -m window --move rel:0:20
+yabai < cmd - up : yabai -m window --move rel:0:-20
+yabai < cmd - left : yabai -m window --move rel:-20:0
+yabai < cmd - right : yabai -m window --move rel:20:0

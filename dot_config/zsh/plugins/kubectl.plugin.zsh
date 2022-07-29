@@ -1,4 +1,5 @@
 alias k="kubectl"
+alias ks="k9s"
 
 alias ka="kubectl apply"
 alias kaf="kubectl apply -f"

@@ -12,7 +12,7 @@ zstyle ':z4h:' auto-update-days '28'
 
 # Start tmux if not already in tmux.
 # zstyle ':z4h:' start-tmux       command tmux -u new -A -D -t z4h
-zstyle ':z4h:' start-tmux 'no'
+# zstyle ':z4h:' start-tmux no
 
 # Move prompt to the bottom when zsh starts and on Ctrl+L.
 zstyle ':z4h:' prompt-at-bottom 'yes'
@@ -84,7 +84,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=1
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
 export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
-export AUTOSWITCH_VIRTUAL_ENV_DIR=".venv"
+export DOCKER_HOST=$(docker context inspect | jq -r '.[0].Endpoints.docker.Host')
 
 # Source plugins.
 for file in $XDG_CONFIG_HOME/zsh/plugins/*; do z4h source $file; done
@@ -94,7 +94,12 @@ z4h source ohmyzsh/ohmyzsh/plugins/docker-compose/docker-compose.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/gitignore/gitignore.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source hlissner/zsh-autopair/autopair.zsh
+z4h source $(pack completion --shell zsh)
 _Z_CMD=j z4h load agkozak/zsh-z
+
+path+=(
+  $(go env GOPATH)/bin
+)
 
 # Define key bindings.
 z4h bindkey edit-command-line Ctrl+V # edit the current command line
@@ -133,11 +138,12 @@ brew-dump() {
 alias cat="bat"
 alias ch="chezmoi"
 alias chcd="cd $(chezmoi source-path)"
+alias clear=z4h-clear-screen-soft-bottom
 alias dk="docker"
 alias ls="exa --all --group-directories-first"
 alias la="$aliases[ls] -l --icons --git"
 alias lt="$aliases[la] --tree --ignore-glob .git"
-alias ldk="DOCKER_HOST="$(docker context inspect | jq -r '.[0].Endpoints.docker.Host')" lazydocker"
+alias ldk="lazydocker"
 alias lg="lazygit"
 alias py="python"
 alias pip="noglob pip"

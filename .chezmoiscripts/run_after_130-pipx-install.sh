@@ -3,12 +3,21 @@
 packages=(
   azure-cli
   black
-  # commitizen
-  django
+  commitizen
   # cookiecutter
+  copier
+  cruft
   # databricks-cli
+  django
+  flake8
+  gitman
+  isort
+  oca-maintainers-tools
+  pre-commit
+  pylint
+  revup
   # streamlit
-  xxh-xxh
+  # xxh-xxh
 )
 
 if command -v pipx &>/dev/null; then

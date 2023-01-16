@@ -40,15 +40,17 @@ zstyle ':z4h:direnv:success' notify 'yes'
 # zstyle ':z4h:ssh:example-hostname1' enable 'yes'
 # zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
 # The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:rpi' enable 'yes'
 zstyle ':z4h:ssh:*' enable 'no'
 
 # Send these files over to the remote host when connecting over SSH to the
 # enabled hosts.
 # zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+zstyle ':z4h:ssh:*' send-extra-files '~/.config/bat' '~/.config/less'
 
 # Autoload functions.
-autoload -Uz bashcompinit
 autoload -Uz zmv
+autoload -Uz bashcompinit
 autoload -Uz edit-command-line
 bashcompinit
 zle -N edit-command-line
@@ -73,33 +75,30 @@ path+=(
   $HOME/bin
   $HOME/.local/bin
 )
-fpath+=($XDG_CONFIG_HOME/zsh/functions)
+fpath+=(
+  $XDG_CONFIG_HOME/zsh/functions
+)
 
 # Export environment variables.
 export GPG_TTY=$TTY
-export EDITOR="nvim"
-export VISUAL="nvim"
 export LESSOPEN="|sh $XDG_CONFIG_HOME/less/lessfilter.sh %s"
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_BUNDLE_NO_LOCK=1
-export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
-export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
-export DOCKER_HOST=$(docker context inspect | jq -r '.[0].Endpoints.docker.Host')
+# export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
+
+if command -v nvim >/dev/null; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+elif command -v vim >/dev/null; then
+  export EDITOR="vim"
+  export VISUAL="vim"
+fi
 
 # Source plugins.
-for file in $XDG_CONFIG_HOME/zsh/plugins/*; do z4h source $file; done
-z4h source $(brew --prefix asdf)/asdf.sh
 z4h source ohmyzsh/ohmyzsh/plugins/docker/docker.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/docker-compose/docker-compose.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/gitignore/gitignore.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source hlissner/zsh-autopair/autopair.zsh
-z4h source $(pack completion --shell zsh)
 _Z_CMD=j z4h load agkozak/zsh-z
-
-path+=(
-  $(go env GOPATH)/bin
-)
 
 # Define key bindings.
 z4h bindkey edit-command-line Ctrl+V # edit the current command line
@@ -122,39 +121,37 @@ dotenv() {
   [[ -f $dotenv_file ]] && set -a && source $dotenv_file && set +a
 }
 
-venv() {
-  venv_path="${1:-.venv}"
-  [[ -f $venv_path/bin/activate ]] && source $venv_path/bin/activate
-}
-
-brew-dump() {
-  brew bundle dump --file=- | egrep "$(brew leaves | xargs printf '"%s"|')tap|cask" >$HOMEBREW_BUNDLE_FILE
-}
-
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
 
 # Define aliases.
-alias cat="bat"
-alias ch="chezmoi"
-alias chcd="cd $(chezmoi source-path)"
 alias clear=z4h-clear-screen-soft-bottom
-alias dk="docker"
-alias ls="exa --all --group-directories-first"
-alias la="$aliases[ls] -l --icons --git"
-alias lt="$aliases[la] --tree --ignore-glob .git"
-alias ldk="lazydocker"
-alias lg="lazygit"
-alias py="python"
-alias pip="noglob pip"
-alias poetry="noglob poetry"
-alias p="$aliases[poetry]"
-alias tf="terraform"
 alias tree="tree -a -I .git"
+alias zshrc="$EDITOR ~/.zshrc"
+alias lg="lazygit"
+alias tf="terraform"
 alias vim="nvim"
 alias y="yarn"
-alias zshrc="$EDITOR ~/.zshrc"
+
+if command -v bat >/dev/null; then
+  alias cat="bat"
+elif command -v batcat >/dev/null; then
+  alias cat="batcat"
+fi
+
+if command -v exa >/dev/null; then
+  alias ls="exa --all --group-directories-first"
+  alias la="$aliases[ls] -l --icons --git"
+  alias lt="$aliases[la] --tree --ignore-glob .git"
+fi
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots    # no special treatment for file names with a leading dot
 setopt no_auto_menu # require an extra TAB press to open the completion menu
+setopt null_glob
+
+if [ -d "$XDG_CONFIG_HOME/zsh/plugins" ]; then
+  for file in $XDG_CONFIG_HOME/zsh/plugins/*; do
+    z4h source $file
+  done
+fi

@@ -1,3 +1,9 @@
+#!/usr/bin/env zsh
+
+if ! command -v pipx >/dev/null; then
+  return
+fi
+
 # Run something, muting output or redirecting it to the debug stream
 # depending on the value of _ARC_DEBUG.
 # If ARGCOMPLETE_USE_TEMPFILES is set, use tempfiles for IPC.

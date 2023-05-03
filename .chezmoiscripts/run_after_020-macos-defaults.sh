@@ -10,6 +10,7 @@ defaults write com.apple.screencapture "location" -string "~/Pictures"
 killall SystemUIServer
 
 defaults write com.apple.Finder "AppleShowAllFiles" -bool "true"
+defaults write com.apple.finder "_FXShowPosixPathInTitle" -bool "true"
 defaults write com.apple.finder "QuitMenuItem" -bool "true"
 killall Finder
 

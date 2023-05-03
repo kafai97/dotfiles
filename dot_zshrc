@@ -83,6 +83,10 @@ fpath+=(
 export GPG_TTY=$TTY
 export LESSOPEN="|sh $XDG_CONFIG_HOME/less/lessfilter.sh %s"
 # export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_BUNDLE_NO_LOCK=1
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 
 if command -v nvim >/dev/null; then
   export EDITOR="nvim"
@@ -111,39 +115,11 @@ z4h bindkey z4h-cd-forward Shift+Right # cd into the next directory
 z4h bindkey z4h-cd-up Shift+Up         # cd into the parent directory
 z4h bindkey z4h-cd-down Shift+Down     # cd into a child directory
 
-# Define functions and completions.
-md() {
-  [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1"
-}
-
-dotenv() {
-  dotenv_file="${1:-.env}"
-  [[ -f $dotenv_file ]] && set -a && source $dotenv_file && set +a
-}
-
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
 
 # Define aliases.
 alias clear=z4h-clear-screen-soft-bottom
-alias tree="tree -a -I .git"
-alias zshrc="$EDITOR ~/.zshrc"
-alias lg="lazygit"
-alias tf="terraform"
-alias vim="nvim"
-alias y="yarn"
-
-if command -v bat >/dev/null; then
-  alias cat="bat"
-elif command -v batcat >/dev/null; then
-  alias cat="batcat"
-fi
-
-if command -v exa >/dev/null; then
-  alias ls="exa --all --group-directories-first"
-  alias la="$aliases[ls] -l --icons --git"
-  alias lt="$aliases[la] --tree --ignore-glob .git"
-fi
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots    # no special treatment for file names with a leading dot

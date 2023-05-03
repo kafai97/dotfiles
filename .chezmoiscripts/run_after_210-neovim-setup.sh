@@ -9,7 +9,7 @@ if command -v pip &>/dev/null; then
   pip install --user pynvim
 fi
 
-if command -v yarn &>/dev/null; then
-  echo "addn neovim nodejs support"
-  yarn global add neovim
+if command -v npm &>/dev/null; then
+  echo "add neovim nodejs support"
+  npm install -g neovim || true
 fi

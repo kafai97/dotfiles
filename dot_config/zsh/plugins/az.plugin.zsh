@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-if ! command -v az >/dev/null; then
-    return
-fi
-
 _python_argcomplete() {
     local IFS=$'\013'
     local SUPPRESS_SPACE=0

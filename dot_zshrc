@@ -87,6 +87,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=1
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
 export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export RTX_USE_TOML=1
 
 if command -v nvim >/dev/null; then
   export EDITOR="nvim"

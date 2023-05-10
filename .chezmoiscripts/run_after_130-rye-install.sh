@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 
 packages=(
-  apache-airflow
-  azure-cli
-  cruft
-  oca-maintainers-tools@git+https://github.com/OCA/maintainer-tools.git
-  pre-commit
+  # apache-airflow
+  # azure-cli
   # commitizen
   # cookiecutter
   # copier
+  # cruft
   # databricks-cli
   # django
   # gitman
+  # oca-maintainers-tools@git+https://github.com/OCA/maintainer-tools.git
+  # pre-commit
   # revup
   # streamlit
   # xxh-xxh

@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
-path+=(
-  $HOME/.rye/shims
-)
+if ! command -v rye >/dev/null; then
+  return
+fi
+
+source $HOME/.rye/env
+
+source <(rye self completion)

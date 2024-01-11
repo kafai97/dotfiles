@@ -1,0 +1,13 @@
+git:
+  parseEmoji: true
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
+    # pager: delta --dark --paging=never
+customCommands:
+  - key: "C"
+    command: "npx cz"
+    description: "commit with commitizen"
+    context: "files"
+    loadingText: "opening commitizen commit tool"
+    subprocess: true

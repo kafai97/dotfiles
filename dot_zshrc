@@ -86,8 +86,8 @@ export LESSOPEN="|sh $XDG_CONFIG_HOME/less/lessfilter.sh %s"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=1
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export RTX_USE_TOML=1
+# export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export EGET_BIN=$HOME/bin
 
 if command -v nvim >/dev/null; then
   export EDITOR="nvim"
@@ -98,8 +98,8 @@ elif command -v vim >/dev/null; then
 fi
 
 # Source plugins.
-z4h source ohmyzsh/ohmyzsh/plugins/docker/docker.plugin.zsh
-z4h source ohmyzsh/ohmyzsh/plugins/docker-compose/docker-compose.plugin.zsh
+# z4h source ohmyzsh/ohmyzsh/plugins/docker/docker.plugin.zsh
+# z4h source ohmyzsh/ohmyzsh/plugins/docker-compose/docker-compose.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/gitignore/gitignore.plugin.zsh
 z4h source ohmyzsh/ohmyzsh/plugins/git/git.plugin.zsh
 z4h source hlissner/zsh-autopair/autopair.zsh
@@ -132,3 +132,4 @@ if [ -d "$XDG_CONFIG_HOME/zsh/plugins" ]; then
     z4h source $file
   done
 fi
+# [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

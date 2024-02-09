@@ -86,8 +86,11 @@ export LESSOPEN="|sh $XDG_CONFIG_HOME/less/lessfilter.sh %s"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BUNDLE_NO_LOCK=1
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
-# export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export EGET_BIN=$HOME/bin
+if command -v brew >/dev/null; then
+  export CFLAGS="-I$(brew --prefix openssl)/include"
+  export LDFLAGS="-L$(brew --prefix openssl)/lib"
+fi
 
 if command -v nvim >/dev/null; then
   export EDITOR="nvim"
@@ -132,4 +135,3 @@ if [ -d "$XDG_CONFIG_HOME/zsh/plugins" ]; then
     z4h source $file
   done
 fi
-# [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

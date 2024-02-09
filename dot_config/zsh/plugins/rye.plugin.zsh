@@ -4,6 +4,8 @@ if ! command -v rye >/dev/null; then
   return
 fi
 
-source $HOME/.rye/env
+path+=(
+  $HOME/.rye/shims
+)
 
 source <(rye self completion)

@@ -7,7 +7,7 @@ fi
 
 packages=(
   # apache-airflow
-  azure-cli
+  # azure-cli
   # commitizen
   # cookiecutter
   # copier
@@ -20,7 +20,7 @@ packages=(
   # oca-maintainers-tools@git+https://github.com/OCA/maintainer-tools.git
   # openapi-python-client
   # pgcli
-  pip-deepfreeze
+  # pip-deepfreeze
   # pip-tools
   # pre-commit
   # revup

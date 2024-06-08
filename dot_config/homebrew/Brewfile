@@ -4,6 +4,9 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/command-not-found"
 tap "homebrew/services"
+tap "libsql/sqld"
+tap "minio/stable"
+tap "nginx/unit"
 # Run your GitHub Actions locally
 brew "act"
 # Simple, modern, secure file encryption
@@ -38,6 +41,8 @@ brew "gnutls"
 brew "gnupg"
 # Kubernetes package manager
 brew "helm"
+# Command-line benchmarking tool
+brew "hyperfine"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Little helper to run CNCF's k3s in Docker
@@ -66,6 +71,8 @@ brew "neovim"
 brew "ollama", restart_service: true
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
 # Rsync for cloud storage
 brew "rclone"
 # Search tool like grep and The Silver Searcher
@@ -81,24 +88,32 @@ brew "tmux"
 # Internet file retriever
 brew "wget"
 brew "chiselstrike/tap/turso"
+# MinIO Client for object storage and filesystems
+brew "minio/stable/mc"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Chromium based browser
 cask "arc"
 # Cross platform SQL editor and database management app
 cask "beekeeper-studio"
+# Voice and text chat software
+cask "discord"
 # Web browser
 cask "firefox-developer-edition"
 # Developer targeted fonts with a high number of glyphs
 cask "font-fira-code-nerd-font"
 # Superfamily of fonts for code
 cask "font-monaspace"
+# Git client for simultaneous branches on top of your existing workflow
+cask "gitbutler"
 # Web browser
 cask "google-chrome"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# Keyboard customizer
+# Keyboard customiser
 cask "karabiner-elements"
+# WordPress local development tool by Flywheel
+cask "local"
 # Privacy-first, open-source platform for knowledge sharing and management
 cask "logseq"
 # Interactive tool for analyzing MongoDB data
@@ -113,6 +128,8 @@ cask "orbstack"
 cask "outline-manager"
 # All-in-one bookmark manager
 cask "raindropio"
+# Imaging utility to install operating systems to a microSD card
+cask "raspberry-pi-imager"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Modified browser that helps in responsive web development
@@ -234,7 +251,9 @@ vscode "redhat.vscode-yaml"
 vscode "ritwickdey.liveserver"
 vscode "scapigliato.vsc-odoo-development"
 vscode "selemondev.vscode-shadcn-svelte"
+vscode "sourcegraph.cody-ai"
 vscode "sourcegraph.sourcegraph"
+vscode "stanislav.vscode-nginx-unit"
 vscode "stateful.marquee"
 vscode "streetsidesoftware.code-spell-checker"
 vscode "sumneko.lua"
@@ -249,7 +268,6 @@ vscode "trond-snekvik.simple-rst"
 vscode "tyriar.sort-lines"
 vscode "vscode-icons-team.vscode-icons"
 vscode "vsls-contrib.gistfs"
-vscode "vue.volar"
 vscode "wakatime.vscode-wakatime"
 vscode "xabikos.javascriptsnippets"
 vscode "xadillax.viml"

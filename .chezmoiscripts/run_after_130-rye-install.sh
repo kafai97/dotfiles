@@ -31,6 +31,6 @@ packages=(
 if command -v rye &>/dev/null; then
   echo "Installing global python binaries with rye"
   for package in $packages; do
-    rye tools install "$package" || true
+    rye install "$package" || true
   done
 fi

@@ -7,5 +7,5 @@ fi
 
 if command -v brew &>/dev/null; then
   echo "Installing libaries and applications with homebrew"
-  brew bundle install
+  brew bundle install --file ~/.config/homebrew/Brewfile
 fi

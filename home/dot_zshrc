@@ -88,6 +88,7 @@ export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"
 export HOMEBREW_BUNDLE_FILE_GLOBAL="$XDG_CONFIG_HOME/homebrew/Brewfile"
 export EGET_BIN=$HOME/bin
 export LESSOPEN="|lesspipe.sh %s"
+export TABBY_DISABLE_USAGE_COLLECTION=1
 
 if command -v brew >/dev/null; then
   export CFLAGS="-I$(brew --prefix openssl)/include"
@@ -135,4 +136,3 @@ if [ -d "$XDG_CONFIG_HOME/zsh/plugins" ]; then
     z4h source $file
   done
 fi
-

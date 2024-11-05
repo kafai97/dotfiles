@@ -27,6 +27,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -62,13 +63,18 @@ never\:"Disables colored output"))' \
         case $line[1] in
             (run)
 _arguments "${_arguments_options[@]}" : \
-'(--all-extras)*--extra=[Include optional dependencies from the extra group name]:EXTRA: ' \
+'(--all-extras)*--extra=[Include optional dependencies from the specified extra name]:EXTRA: ' \
+'(--only-group)*--group=[Include dependencies from the specified dependency group]:GROUP: ' \
+'*--no-group=[Exclude dependencies from the specified dependency group]:NO_GROUP: ' \
+'(--group)*--only-group=[Only include dependencies from the specified dependency group]:ONLY_GROUP: ' \
 '*--with=[Run with the given packages installed]:WITH: ' \
 '*--with-editable=[Run with the given packages installed as editables]:WITH_EDITABLE: ' \
 '*--with-requirements=[Run with all packages listed in the given \`requirements.txt\` files]:WITH_REQUIREMENTS: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -114,17 +120,22 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
-'--dev[Include development dependencies]' \
-'--no-dev[Omit development dependencies]' \
-'(--no-dev)--only-dev[Omit non-development dependencies]' \
+'--dev[Include the development dependency group]' \
+'--no-dev[Omit the development dependency group]' \
+'(-s --script)-m[Run a Python module]' \
+'(-s --script)--module[Run a Python module]' \
+'(--no-dev)--only-dev[Only include the development dependency group]' \
 '--no-editable[Install any editable dependencies, including the project and any workspace members, as non-editable]' \
 '--isolated[Run the command in an isolated virtual environment]' \
 '(--frozen)--no-sync[Avoid syncing the virtual environment]' \
 '(--frozen)--locked[Assert that the \`uv.lock\` will remain unchanged]' \
 '(--locked)--frozen[Run without updating the \`uv.lock\` file]' \
+'(-m --module)-s[Run the given path as a Python script]' \
+'(-m --module)--script[Run the given path as a Python script]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -171,7 +182,18 @@ never\:"Disables colored output"))' \
 ;;
 (init)
 _arguments "${_arguments_options[@]}" : \
-'--name=[The name of the project]:NAME: ' \
+'(--script)--name=[The name of the project]:NAME: ' \
+'(--script)--vcs=[Initialize a version control system for the project]:VCS:((git\:"Use Git for version control"
+none\:"Do not use any version control system"))' \
+'(--script --no-package)--build-backend=[Initialize a build-backend of choice for the project]:BUILD_BACKEND:((hatch\:"Use \[hatchling\](https\://pypi.org/project/hatchling) as the project build backend"
+flit\:"Use \[flit-core\](https\://pypi.org/project/flit-core) as the project build backend"
+pdm\:"Use \[pdm-backend\](https\://pypi.org/project/pdm-backend) as the project build backend"
+setuptools\:"Use \[setuptools\](https\://pypi.org/project/setuptools) as the project build backend"
+maturin\:"Use \[maturin\](https\://pypi.org/project/maturin) as the project build backend"
+scikit\:"Use \[scikit-build-core\](https\://pypi.org/project/scikit-build-core) as the project build backend"))' \
+'--author-from=[Fill in the \`authors\` field in the \`pyproject.toml\`]:AUTHOR_FROM:((auto\:"Fetch the author information from some sources (e.g., Git) automatically"
+git\:"Fetch the author information from Git configuration only"
+none\:"Do not infer the author information"))' \
 '-p+[The Python interpreter to use to determine the minimum supported Python version.]:PYTHON: ' \
 '--python=[The Python interpreter to use to determine the minimum supported Python version.]:PYTHON: ' \
 '--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
@@ -186,12 +208,14 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--package)--virtual[Create a virtual project, rather than a package]' \
 '--package[Set up the project to be built as a Python package]' \
-'(--lib)--no-package[Do not set up the project to be built as a Python package]' \
-'(--lib)--app[Create a project for an application]' \
-'(--app)--lib[Create a project for a library]' \
+'(--lib --build-backend)--no-package[Do not set up the project to be built as a Python package]' \
+'(--lib --script)--app[Create a project for an application]' \
+'(--app --script)--lib[Create a project for a library]' \
+'(--app --lib --package --build-backend)--script[Create a script]' \
 '--no-readme[Do not create a \`README.md\` file]' \
 '--no-pin-python[Do not create a \`.python-version\` file for the project]' \
 '--no-workspace[Avoid discovering a workspace and create a standalone project]' \
@@ -218,21 +242,24 @@ never\:"Disables colored output"))' \
 '--help[Display the concise help for this command]' \
 '-V[Display the uv version]' \
 '--version[Display the uv version]' \
-'::path -- The path to use for the project:' \
+'::path -- The path to use for the project/script:_files' \
 && ret=0
 ;;
 (add)
 _arguments "${_arguments_options[@]}" : \
 '*-r+[Add all packages listed in the given \`requirements.txt\` files]:REQUIREMENTS:_files' \
 '*--requirements=[Add all packages listed in the given \`requirements.txt\` files]:REQUIREMENTS:_files' \
-'(--dev)--optional=[Add the requirements to the specified optional dependency group]:OPTIONAL: ' \
+'(--dev --group)--optional=[Add the requirements to the package'\''s optional dependencies for the specified extra]:OPTIONAL: ' \
+'(--dev --optional)--group=[Add the requirements to the specified dependency group]:GROUP: ' \
 '--rev=[Commit to use when adding a dependency from Git]:REV: ' \
 '--tag=[Tag to use when adding a dependency from Git]:TAG: ' \
 '--branch=[Branch to use when adding a dependency from Git]:BRANCH: ' \
 '*--extra=[Extras to enable for the dependency]:EXTRA: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -279,8 +306,9 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'(--optional)--dev[Add the requirements as development dependencies]' \
+'(--optional --group)--dev[Add the requirements to the development dependency group]' \
 '--editable[Add the requirements as editable]' \
 '--no-editable[]' \
 '(--editable --no-editable --rev --tag --branch)--raw-sources[Add source requirements to \`project.dependencies\`, rather than \`tool.uv.sources\`]' \
@@ -333,10 +361,13 @@ never\:"Disables colored output"))' \
 ;;
 (remove)
 _arguments "${_arguments_options[@]}" : \
-'(--dev)--optional=[Remove the packages from the specified optional dependency group]:OPTIONAL: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'(--dev --group)--optional=[Remove the packages from the project'\''s optional dependencies for the specified extra]:OPTIONAL: ' \
+'(--dev --optional)--group=[Remove the packages from the specified dependency group]:GROUP: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -383,8 +414,9 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
-'(--optional)--dev[Remove the packages from the development dependencies]' \
+'(--optional --group)--dev[Remove the packages from the development dependency group]' \
 '(--frozen)--no-sync[Avoid syncing the virtual environment after re-locking the project]' \
 '(--frozen)--locked[Assert that the \`uv.lock\` will remain unchanged]' \
 '(--locked)--frozen[Remove dependencies without re-locking the project]' \
@@ -434,11 +466,16 @@ never\:"Disables colored output"))' \
 ;;
 (sync)
 _arguments "${_arguments_options[@]}" : \
-'(--all-extras)*--extra=[Include optional dependencies from the extra group name]:EXTRA: ' \
+'(--all-extras)*--extra=[Include optional dependencies from the specified extra name]:EXTRA: ' \
+'(--only-group)*--group=[Include dependencies from the specified dependency group]:GROUP: ' \
+'*--no-group=[Exclude dependencies from the specified dependency group]:NO_GROUP: ' \
+'(--group)*--only-group=[Only include dependencies from the specified dependency group]:ONLY_GROUP: ' \
 '*--no-install-package=[Do not install the given package(s)]:NO_INSTALL_PACKAGE: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -484,12 +521,13 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
-'--dev[Include development dependencies]' \
-'--no-dev[Omit development dependencies]' \
-'(--no-dev)--only-dev[Omit non-development dependencies]' \
+'--dev[Include the development dependency group]' \
+'--no-dev[Omit the development dependency group]' \
+'(--no-dev)--only-dev[Only include the development dependency group]' \
 '--no-editable[Install any editable dependencies, including the project and any workspace members, as non-editable]' \
 '--inexact[Do not remove extraneous packages present in the environment]' \
 '--exact[Perform an exact sync, removing extraneous packages]' \
@@ -542,9 +580,11 @@ never\:"Disables colored output"))' \
 ;;
 (lock)
 _arguments "${_arguments_options[@]}" : \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -588,9 +628,11 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--frozen)--locked[Assert that the \`uv.lock\` will remain unchanged]' \
 '(--locked)--frozen[Assert that a \`uv.lock\` exists, without updating it]' \
+'(--frozen --locked)--dry-run[Perform a dry run, without writing the lockfile]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '-U[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
 '--upgrade[Allow package upgrades, ignoring pinned versions in any existing output file. Implies \`--refresh\`]' \
@@ -634,13 +676,18 @@ never\:"Disables colored output"))' \
 _arguments "${_arguments_options[@]}" : \
 '--format=[The format to which \`uv.lock\` should be exported]:FORMAT:((requirements-txt\:"Export in \`requirements.txt\` format"))' \
 '--package=[Export the dependencies for a specific package in the workspace]:PACKAGE: ' \
-'(--all-extras)*--extra=[Include optional dependencies from the extra group name]:EXTRA: ' \
+'(--all-extras)*--extra=[Include optional dependencies from the specified extra name]:EXTRA: ' \
+'(--only-group)*--group=[Include dependencies from the specified dependency group]:GROUP: ' \
+'*--no-group=[Exclude dependencies from the specified dependency group]:NO_GROUP: ' \
+'(--group)*--only-group=[Only include dependencies from the specified dependency group]:ONLY_GROUP: ' \
 '-o+[Write the exported requirements to the given file]:OUTPUT_FILE:_files' \
 '--output-file=[Write the exported requirements to the given file]:OUTPUT_FILE:_files' \
 '*--no-emit-package=[Do not emit the given package(s)]:NO_EMIT_PACKAGE: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -684,12 +731,15 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
-'--dev[Include development dependencies]' \
-'--no-dev[Omit development dependencies]' \
-'(--no-dev)--only-dev[Omit non-development dependencies]' \
+'--dev[Include the development dependency group]' \
+'--no-dev[Omit the development dependency group]' \
+'(--no-dev)--only-dev[Only include the development dependency group]' \
+'--no-header[Exclude the comment header at the top of the generated output file]' \
+'--header[]' \
 '--no-editable[Install any editable dependencies, including the project and any workspace members, as non-editable]' \
 '--hashes[Include hashes for all dependencies]' \
 '--no-hashes[Omit hashes in the generated output]' \
@@ -742,11 +792,16 @@ _arguments "${_arguments_options[@]}" : \
 '--depth=[Maximum display depth of the dependency tree]:DEPTH: ' \
 '*--prune=[Prune the given package from the display of the dependency tree]:PRUNE: ' \
 '*--package=[Display only the specified packages]:PACKAGE: ' \
+'(--only-group)*--group=[Include dependencies from the specified dependency group]:GROUP: ' \
+'*--no-group=[Exclude dependencies from the specified dependency group]:NO_GROUP: ' \
+'(--group)*--only-group=[Only include dependencies from the specified dependency group]:ONLY_GROUP: ' \
 '*--no-build-package=[Don'\''t build source distributions for a specific package]:NO_BUILD_PACKAGE: ' \
 '*--no-binary-package=[Don'\''t install pre-built wheels for a specific package]:NO_BINARY_PACKAGE: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -805,10 +860,14 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--universal[Show a platform-independent dependency tree]' \
 '--no-dedupe[Do not de-duplicate repeated dependencies. Usually, when a package has already displayed its dependencies, further occurrences will not re-display its dependencies, and will include a (*) to indicate it has already been shown. This flag will cause those duplicates to be repeated]' \
 '--invert[Show the reverse dependencies for the given package. This flag will invert the tree and display the packages that depend on the given package]' \
+'--dev[Include the development dependency group]' \
+'(--no-dev)--only-dev[Only include the development dependency group]' \
+'(--invert)--no-dev[Omit the development dependency group]' \
 '(--frozen)--locked[Assert that the \`uv.lock\` will remain unchanged]' \
 '(--locked)--frozen[Display the requirements without locking the project]' \
 '--no-build[Don'\''t build source distributions]' \
@@ -862,6 +921,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -902,9 +962,11 @@ _arguments "${_arguments_options[@]}" : \
 '*--with=[Run with the given packages installed]:WITH: ' \
 '*--with-editable=[Run with the given packages installed as editables]:WITH_EDITABLE: ' \
 '*--with-requirements=[Run with all packages listed in the given \`requirements.txt\` files]:WITH_REQUIREMENTS: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -950,6 +1012,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
@@ -1001,9 +1064,11 @@ _arguments "${_arguments_options[@]}" : \
 '*--with=[Run with the given packages installed]:WITH: ' \
 '*--with-editable=[Run with the given packages installed as editables]:WITH_EDITABLE: ' \
 '*--with-requirements=[Run with all packages listed in the given \`requirements.txt\` files]:WITH_REQUIREMENTS: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -1049,6 +1114,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--isolated[Run the tool in an isolated virtual environment, ignoring any already-installed tools]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
@@ -1096,12 +1162,15 @@ never\:"Disables colored output"))' \
 ;;
 (install)
 _arguments "${_arguments_options[@]}" : \
+'*--with-editable=[Include the given packages as editables]:WITH_EDITABLE: ' \
 '--from=[The package to install commands from]:FROM: ' \
 '*--with=[Include the following extra requirements]:WITH: ' \
 '*--with-requirements=[Run all requirements listed in the given \`requirements.txt\` files]:WITH_REQUIREMENTS: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -1146,6 +1215,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-e[]' \
 '--editable[]' \
@@ -1196,9 +1266,13 @@ never\:"Disables colored output"))' \
 ;;
 (upgrade)
 _arguments "${_arguments_options[@]}" : \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'-p+[Upgrade a tool, and specify it to use the given Python interpreter to build its environment. Use with \`--all\` to apply to all tools.]:PYTHON: ' \
+'--python=[Upgrade a tool, and specify it to use the given Python interpreter to build its environment. Use with \`--all\` to apply to all tools.]:PYTHON: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -1240,6 +1314,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '()--all[Upgrade all tools]' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
@@ -1298,6 +1373,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--show-paths[Whether to display the path to each tool environment and installed executable]' \
 '--show-version-specifiers[Whether to display the version specifier(s) used to install each tool]' \
@@ -1340,6 +1416,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '()--all[Uninstall all tools]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1382,6 +1459,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1422,6 +1500,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--bin[Show the directory into which \`uv tool\` will install executables.]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1467,6 +1546,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1515,6 +1595,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--all-versions[List all Python versions, including old patch versions]' \
 '--all-platforms[List Python downloads for all platforms]' \
@@ -1558,6 +1639,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-r[Reinstall the requested Python version, if it'\''s already installed]' \
 '--reinstall[Reinstall the requested Python version, if it'\''s already installed]' \
@@ -1601,6 +1683,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--no-project[Avoid discovering a project or workspace]' \
 '--system[Only find system Python interpreters]' \
@@ -1645,6 +1728,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--resolved[Write the resolved Python interpreter path instead of the request]' \
 '--no-resolved[]' \
@@ -1689,7 +1773,9 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'--bin[Show the directory into which \`uv python\` will install Python executables.]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
@@ -1729,6 +1815,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '()--all[Uninstall all managed Python versions]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1775,6 +1862,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -1816,10 +1904,12 @@ _arguments "${_arguments_options[@]}" : \
 '*--override=[Override versions using the given requirements files]:OVERRIDE: ' \
 '*-b+[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
 '*--build-constraint=[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
-'(--all-extras)*--extra=[Include optional dependencies from the extra group name; may be provided more than once]:EXTRA: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'(--all-extras)*--extra=[Include optional dependencies from the specified extra name; may be provided more than once]:EXTRA: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -1893,6 +1983,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
@@ -1974,9 +2065,11 @@ _arguments "${_arguments_options[@]}" : \
 '*--constraint=[Constrain versions using the given requirements files]:CONSTRAINT: ' \
 '*-b+[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
 '*--build-constraint=[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--reinstall-package=[Reinstall a specific package, regardless of whether it'\''s already installed. Implies \`--refresh-package\`]:REINSTALL_PACKAGE: ' \
@@ -2035,6 +2128,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--no-index[Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via \`--find-links\`]' \
 '--reinstall[Reinstall all packages, regardless of whether they'\''re already installed. Implies \`--refresh\`]' \
@@ -2058,7 +2152,7 @@ never\:"Disables colored output"))' \
 '(--no-binary --only-binary)--build[]' \
 '--allow-empty-requirements[Allow sync of empty requirements, which will clear the environment of all packages]' \
 '--no-allow-empty-requirements[]' \
-'--strict[Validate the Python environment after completing the installation, to detect and with missing dependencies or other issues]' \
+'--strict[Validate the Python environment after completing the installation, to detect packages with missing dependencies or other issues]' \
 '--no-strict[]' \
 '--dry-run[Perform a dry run, i.e., don'\''t actually install anything but resolve the dependencies and print the resulting plan]' \
 '-a[]' \
@@ -2101,10 +2195,12 @@ _arguments "${_arguments_options[@]}" : \
 '*--override=[Override versions using the given requirements files]:OVERRIDE: ' \
 '*-b+[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
 '*--build-constraint=[Constrain build dependencies using the given requirements files when building source distributions]:BUILD_CONSTRAINT: ' \
-'(--all-extras)*--extra=[Include optional dependencies from the extra group name; may be provided more than once]:EXTRA: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'(--all-extras)*--extra=[Include optional dependencies from the specified extra name; may be provided more than once]:EXTRA: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -2169,6 +2265,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '(--extra)--all-extras[Include all optional dependencies]' \
 '--no-all-extras[]' \
@@ -2198,7 +2295,9 @@ never\:"Disables colored output"))' \
 '--no-break-system-packages[]' \
 '(--no-binary --only-binary)--no-build[Don'\''t build source distributions]' \
 '(--no-binary --only-binary)--build[]' \
-'--strict[Validate the Python environment after completing the installation, to detect and with missing dependencies or other issues]' \
+'--inexact[Do not remove extraneous packages present in the environment]' \
+'--exact[Perform an exact sync, removing extraneous packages]' \
+'--strict[Validate the Python environment after completing the installation, to detect packages with missing dependencies or other issues]' \
 '--no-strict[]' \
 '--dry-run[Perform a dry run, i.e., don'\''t actually install anything but resolve the dependencies and print the resulting plan]' \
 '--disable-pip-version-check[]' \
@@ -2252,6 +2351,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--system[Use the system Python to uninstall packages]' \
 '--no-system[]' \
@@ -2300,6 +2400,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--exclude-editable[Exclude any editable packages from output]' \
 '--strict[Validate the Python environment, to detect packages with missing dependencies and other issues]' \
@@ -2352,6 +2453,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-e[Only include editable projects]' \
 '--editable[Only include editable projects]' \
@@ -2403,9 +2505,12 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--strict[Validate the Python environment, to detect packages with missing dependencies and other issues]' \
 '--no-strict[]' \
+'-f[Show the full list of installed files for each package]' \
+'--files[Show the full list of installed files for each package]' \
 '--system[Show a package in the system Python environment]' \
 '--no-system[]' \
 '--disable-pip-version-check[]' \
@@ -2455,6 +2560,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--show-version-specifiers[Show the version constraint(s) imposed on each package]' \
 '--no-dedupe[Do not de-duplicate repeated dependencies. Usually, when a package has already displayed its dependencies, further occurrences will not re-display its dependencies, and will include a (*) to indicate it has already been shown. This flag will cause those duplicates to be repeated]' \
@@ -2505,6 +2611,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--system[Check packages in the system Python environment]' \
 '--no-system[]' \
@@ -2542,9 +2649,11 @@ _arguments "${_arguments_options[@]}" : \
 '-p+[The Python interpreter to use for the virtual environment.]:PYTHON: ' \
 '--python=[The Python interpreter to use for the virtual environment.]:PYTHON: ' \
 '--prompt=[Provide an alternative prompt prefix for the virtual environment.]:PROMPT: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '--index-strategy=[The strategy to use when resolving against multiple index URLs]:INDEX_STRATEGY:((first-index\:"Only use results from the first index that returns a match for a given package name"
@@ -2570,6 +2679,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--system[Ignore virtual environments when searching for the Python interpreter]' \
 '--no-system[This flag is included for compatibility only, it has no effect]' \
@@ -2612,16 +2722,18 @@ never\:"Disables colored output"))' \
 ;;
 (build)
 _arguments "${_arguments_options[@]}" : \
-'--package=[Build a specific package in the workspace]:PACKAGE: ' \
+'(--all)--package=[Build a specific package in the workspace]:PACKAGE: ' \
 '-o+[The output directory to which distributions should be written]:OUT_DIR:_files' \
 '--out-dir=[The output directory to which distributions should be written]:OUT_DIR:_files' \
 '*-b+[Constrain build dependencies using the given requirements files when building distributions]:BUILD_CONSTRAINT: ' \
 '*--build-constraint=[Constrain build dependencies using the given requirements files when building distributions]:BUILD_CONSTRAINT: ' \
 '-p+[The Python interpreter to use for the build environment.]:PYTHON: ' \
 '--python=[The Python interpreter to use for the build environment.]:PYTHON: ' \
-'-i+[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'--index-url=[The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
-'*--extra-index-url=[Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
+'*--index=[The URLs to use when resolving dependencies, in addition to the default index]:INDEX: ' \
+'--default-index=[The URL of the default package index (by default\: <https\://pypi.org/simple>)]:DEFAULT_INDEX: ' \
+'-i+[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'--index-url=[(Deprecated\: use \`--default-index\` instead) The URL of the Python package index (by default\: <https\://pypi.org/simple>)]:INDEX_URL: ' \
+'*--extra-index-url=[(Deprecated\: use \`--index\` instead) Extra URLs of package indexes to use, in addition to \`--index-url\`]:EXTRA_INDEX_URL: ' \
 '*-f+[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*--find-links=[Locations to search for candidate distributions, in addition to those found in the registry indexes]:FIND_LINKS: ' \
 '*-P+[Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies \`--refresh-package\`]:UPGRADE_PACKAGE: ' \
@@ -2663,9 +2775,13 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'(--package)--all[Builds all packages in the workspace]' \
 '--sdist[Build a source distribution ("sdist") from the given directory]' \
 '--wheel[Build a binary distribution ("wheel") from the given directory]' \
+'--build-logs[]' \
+'--no-build-logs[Hide logs from the build backend]' \
 '--require-hashes[Require a matching hash for each build requirement]' \
 '--no-require-hashes[]' \
 '--verify-hashes[Validate any hashes provided in the build constraints file]' \
@@ -2710,6 +2826,449 @@ never\:"Disables colored output"))' \
 '::src -- The directory from which distributions should be built, or a source distribution archive to build into a wheel:_files' \
 && ret=0
 ;;
+(publish)
+_arguments "${_arguments_options[@]}" : \
+'--publish-url=[The URL of the upload endpoint (not the index URL)]:PUBLISH_URL: ' \
+'-u+[The username for the upload]:USERNAME: ' \
+'--username=[The username for the upload]:USERNAME: ' \
+'-p+[The password for the upload]:PASSWORD: ' \
+'--password=[The password for the upload]:PASSWORD: ' \
+'(-u --username -p --password)-t+[The token for the upload]:TOKEN: ' \
+'(-u --username -p --password)--token=[The token for the upload]:TOKEN: ' \
+'--trusted-publishing=[Configure using trusted publishing through GitHub Actions]:TRUSTED_PUBLISHING:((automatic\:"Try trusted publishing when we'\''re already in GitHub Actions, continue if that fails"
+always\:""
+never\:""))' \
+'--keyring-provider=[Attempt to use \`keyring\` for authentication for remote requirements files]:KEYRING_PROVIDER:((disabled\:"Do not use keyring for credential lookup"
+subprocess\:"Use the \`keyring\` command for credential lookup"))' \
+'*--allow-insecure-host=[Allow insecure connections to a host]:ALLOW_INSECURE_HOST: ' \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+'*::files -- Paths to the files to upload. Accepts glob expressions:' \
+&& ret=0
+;;
+(build-backend)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+":: :_uv__build-backend_commands" \
+"*::: :->build-backend" \
+&& ret=0
+
+    case $state in
+    (build-backend)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:uv-build-backend-command-$line[1]:"
+        case $line[1] in
+            (build-sdist)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+':sdist_directory:_files' \
+&& ret=0
+;;
+(build-wheel)
+_arguments "${_arguments_options[@]}" : \
+'--metadata-directory=[]:METADATA_DIRECTORY:_files' \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+':wheel_directory:_files' \
+&& ret=0
+;;
+(build-editable)
+_arguments "${_arguments_options[@]}" : \
+'--metadata-directory=[]:METADATA_DIRECTORY:_files' \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+':wheel_directory:_files' \
+&& ret=0
+;;
+(get-requires-for-build-sdist)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+&& ret=0
+;;
+(get-requires-for-build-wheel)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+&& ret=0
+;;
+(prepare-metadata-for-build-wheel)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+':wheel_directory:_files' \
+&& ret=0
+;;
+(get-requires-for-build-editable)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+&& ret=0
+;;
+(prepare-metadata-for-build-editable)
+_arguments "${_arguments_options[@]}" : \
+'--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
+'--python-preference=[Whether to prefer uv-managed or system Python installations]:PYTHON_PREFERENCE:((only-managed\:"Only use managed Python installations; never use system Python installations"
+managed\:"Prefer managed Python installations over system Python installations"
+system\:"Prefer system Python installations over managed Python installations"
+only-system\:"Only use system Python installations; never use managed Python installations"))' \
+'--python-fetch=[Deprecated version of \[\`Self\:\:python_downloads\`\]]:PYTHON_FETCH:((automatic\:"Automatically download managed Python installations when needed"
+manual\:"Do not automatically download managed Python installations; require explicit installation"
+never\:"Do not ever allow Python downloads"))' \
+'(--no-color)--color=[Control colors in output]:COLOR_CHOICE:((auto\:"Enables colored output only when the output is going to a terminal or TTY with support"
+always\:"Enables colored output regardless of the detected environment"
+never\:"Disables colored output"))' \
+'--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
+'--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
+'-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
+'--allow-python-downloads[Allow automatically downloading Python when required. \[env\: "UV_PYTHON_DOWNLOADS=auto"\]]' \
+'--no-python-downloads[Disable automatic downloads of Python. \[env\: "UV_PYTHON_DOWNLOADS=never"\]]' \
+'(-v --verbose)-q[Do not print any output]' \
+'(-v --verbose)--quiet[Do not print any output]' \
+'(-q --quiet)*-v[Use verbose output]' \
+'(-q --quiet)*--verbose[Use verbose output]' \
+'(--color)--no-color[Disable colors]' \
+'--native-tls[Whether to load TLS certificates from the platform'\''s native certificate store]' \
+'--no-native-tls[]' \
+'--offline[Disable network access]' \
+'--no-offline[]' \
+'--preview[Whether to enable experimental, preview features]' \
+'--no-preview[]' \
+'--isolated[Avoid discovering a \`pyproject.toml\` or \`uv.toml\` file]' \
+'--show-settings[Show the resolved settings for the current command]' \
+'--no-progress[Hide all progress outputs]' \
+'--no-config[Avoid discovering configuration files (\`pyproject.toml\`, \`uv.toml\`)]' \
+'-h[Display the concise help for this command]' \
+'--help[Display the concise help for this command]' \
+'-V[Display the uv version]' \
+'--version[Display the uv version]' \
+':wheel_directory:_files' \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
 (cache)
 _arguments "${_arguments_options[@]}" : \
 '--cache-dir=[Path to the cache directory]:CACHE_DIR:_files' \
@@ -2724,6 +3283,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2772,6 +3332,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2813,6 +3374,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--ci[Optimize the cache for persistence in a continuous integration environment, like GitHub Actions]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2854,6 +3416,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2898,6 +3461,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2947,6 +3511,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -2992,6 +3557,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -3035,6 +3601,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
 '--no-cache[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -3076,6 +3643,7 @@ never\:"Disables colored output"))' \
 manual\:"Do not automatically download managed Python installations; require explicit installation"
 never\:"Do not ever allow Python downloads"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '-n[]' \
 '--no-cache[]' \
 '--no-python-downloads[]' \
@@ -3116,6 +3684,7 @@ never\:"Do not ever allow Python downloads"))' \
 always\:"Enables colored output regardless of the detected environment"
 never\:"Disables colored output"))' \
 '--directory=[Change to the given directory prior to running the command]:DIRECTORY:_files' \
+'--project=[Run the command within the given project directory]:PROJECT:_files' \
 '--config-file=[The path to a \`uv.toml\` file to use for configuration]:CONFIG_FILE:_files' \
 '--no-pager[Disable pager when printing help]' \
 '-n[Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation]' \
@@ -3165,6 +3734,8 @@ _uv_commands() {
 'pip:Manage Python packages with a pip-compatible interface' \
 'venv:Create a virtual environment' \
 'build:Build Python packages into source distributions and wheels' \
+'publish:Upload distributions to an index' \
+'build-backend:The implementation of the build backend' \
 'cache:Manage uv'\''s cache' \
 'self:Manage the uv executable' \
 'clean:Clear the cache, removing all entries or those linked to specific packages' \
@@ -3183,6 +3754,60 @@ _uv__add_commands() {
 _uv__build_commands() {
     local commands; commands=()
     _describe -t commands 'uv build commands' commands "$@"
+}
+(( $+functions[_uv__build-backend_commands] )) ||
+_uv__build-backend_commands() {
+    local commands; commands=(
+'build-sdist:PEP 517 hook \`build_sdist\`' \
+'build-wheel:PEP 517 hook \`build_wheel\`' \
+'build-editable:PEP 660 hook \`build_editable\`' \
+'get-requires-for-build-sdist:PEP 517 hook \`get_requires_for_build_sdist\`' \
+'get-requires-for-build-wheel:PEP 517 hook \`get_requires_for_build_wheel\`' \
+'prepare-metadata-for-build-wheel:PEP 517 hook \`prepare_metadata_for_build_wheel\`' \
+'get-requires-for-build-editable:PEP 660 hook \`get_requires_for_build_editable\`' \
+'prepare-metadata-for-build-editable:PEP 660 hook \`prepare_metadata_for_build_editable\`' \
+    )
+    _describe -t commands 'uv build-backend commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__build-editable_commands] )) ||
+_uv__build-backend__build-editable_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend build-editable commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__build-sdist_commands] )) ||
+_uv__build-backend__build-sdist_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend build-sdist commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__build-wheel_commands] )) ||
+_uv__build-backend__build-wheel_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend build-wheel commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__get-requires-for-build-editable_commands] )) ||
+_uv__build-backend__get-requires-for-build-editable_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend get-requires-for-build-editable commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__get-requires-for-build-sdist_commands] )) ||
+_uv__build-backend__get-requires-for-build-sdist_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend get-requires-for-build-sdist commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__get-requires-for-build-wheel_commands] )) ||
+_uv__build-backend__get-requires-for-build-wheel_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend get-requires-for-build-wheel commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__prepare-metadata-for-build-editable_commands] )) ||
+_uv__build-backend__prepare-metadata-for-build-editable_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend prepare-metadata-for-build-editable commands' commands "$@"
+}
+(( $+functions[_uv__build-backend__prepare-metadata-for-build-wheel_commands] )) ||
+_uv__build-backend__prepare-metadata-for-build-wheel_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv build-backend prepare-metadata-for-build-wheel commands' commands "$@"
 }
 (( $+functions[_uv__cache_commands] )) ||
 _uv__cache_commands() {
@@ -3297,6 +3922,11 @@ _uv__pip__tree_commands() {
 _uv__pip__uninstall_commands() {
     local commands; commands=()
     _describe -t commands 'uv pip uninstall commands' commands "$@"
+}
+(( $+functions[_uv__publish_commands] )) ||
+_uv__publish_commands() {
+    local commands; commands=()
+    _describe -t commands 'uv publish commands' commands "$@"
 }
 (( $+functions[_uv__python_commands] )) ||
 _uv__python_commands() {

@@ -70,6 +70,7 @@ _.python.venv = ".venv"
 
 [tools]
 python = "$version"
+uv = "latest"
 EOF
 }
 
@@ -78,7 +79,7 @@ mise-venv-create() {
   $XDG_DATA_HOME/mise/installs/python/$version/bin/python -m venv .venv
 }
 
-code-python-setting() {
+code-python-settings() {
   if [[ ! -d '.vscode' ]]; then
     mkdir .vscode
   fi

@@ -13,8 +13,9 @@ command -v lazydocker >/dev/null && alias ldk="lazydocker"
 command -v lazygit >/dev/null && alias lg="lazygit"
 command -v nvim >/dev/null && alias vim="nvim"
 command -v terraform >/dev/null && alias tf="terraform"
+command -v brew >/dev/null && alias b="brew"
 alias y="yarn"
-alias jo=joshuto
+alias jo="joshuto"
 
 if command -v bat >/dev/null; then
   alias cat="bat"

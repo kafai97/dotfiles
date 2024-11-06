@@ -6,6 +6,7 @@ rust = "latest"
 "ubi:achristmascarl/rainfrog" = "latest"
 "ubi:danielgtaylor/restish" = "latest"
 "pipx:pre-commit" = "latest"
+"npm:neonctl" = "latest"
 "ubi:jwilder/dockerize" = "latest"
 
 [settings]

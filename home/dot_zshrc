@@ -81,7 +81,7 @@ fpath+=(
 
 # Export environment variables.
 export GPG_TTY=$TTY
-# export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
+export GOKU_EDN_CONFIG_FILE="$XDG_CONFIG_HOME/karabiner/karabiner.edn"
 # export HOMEBREW_NO_AUTO_UPDATE=1
 # export HOMEBREW_BUNDLE_NO_LOCK=1
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/homebrew/Brewfile"

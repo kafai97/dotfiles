@@ -17,7 +17,21 @@
       :des "capslock => esc(click) / hyper(hold)"
       :rules [[:##caps_lock :!QWEright_shift nil {:alone :escape}]]
     }
-        {
+    {
+      :des "home row mods (ACSG)"
+      :rules [
+        [:a [:left_shift] nil {:alone :a}]
+        [:s [:left_control] nil {:alone :s}]
+        [:d [:left_option] nil {:alone :d}]
+        [:f [:left_command] nil {:alone :f}]
+
+        [:j [:right_command] nil {:alone :j}]
+        [:k [:right_option] nil {:alone :k}]
+        [:l [:right_control] nil {:alone :l}]
+        [:semicolon [:right_shift] nil {:alone :semicolon}]
+      ]
+    }
+    {
       :des "hyper + space => switch language"
       :rules [[:!QWERspacebar :!Tspacebar]]
     }

@@ -8,6 +8,7 @@ rust = "latest"
 "pipx:pre-commit" = "latest"
 "npm:neonctl" = "latest"
 "ubi:jwilder/dockerize" = "latest"
+"ubi:appleboy/CodeGPT" = "latest"
 
 [settings]
 pipx_uvx = true

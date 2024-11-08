@@ -7,7 +7,7 @@ git:
 customCommands:
   # retrieved from: https://github.com/jesseduffield/lazygit/wiki/Custom-Commands-Compendium#conventional-commit
   - description: "Create new conventional commit"
-    key: "<c-c>"
+    key: "Z"
     context: "global"
     prompts:
       - type: "menu"
@@ -69,6 +69,11 @@ customCommands:
         body: "Are you sure you want to commit?"
     command: "git commit --message '{{.Form.Type}}{{ if .Form.Scope }}({{ .Form.Scope }}){{ end }}{{.Form.Breaking}}: {{.Form.Message}}'"
     loadingText: "Creating conventional commit..."
+  - key: "<c-z>"
+    command: "codegpt commit --preview"
+    context: "files"
+    loadingText: "write commit message by CodeGPT"
+    subprocess: true
   - description: "Add empty commit"
     # key: "E"
     context: "commits"

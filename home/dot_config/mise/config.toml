@@ -2,13 +2,6 @@
 node = "20"
 uv = "latest"
 rust = "latest"
-"cargo:ubi-cli" = "latest"
-"ubi:achristmascarl/rainfrog" = "latest"
-"ubi:danielgtaylor/restish" = "latest"
-"pipx:pre-commit" = "latest"
-"npm:neonctl" = "latest"
-"ubi:jwilder/dockerize" = "latest"
-"ubi:appleboy/CodeGPT" = "latest"
 
 [settings]
 pipx_uvx = true

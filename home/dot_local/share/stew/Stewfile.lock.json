@@ -1,0 +1,76 @@
+{
+	"os": "darwin",
+	"arch": "arm64",
+	"packages": [
+		{
+			"source": "github",
+			"owner": "yorukot",
+			"repo": "superfile",
+			"tag": "v1.1.5",
+			"asset": "superfile-darwin-v1.1.5-arm64.tar.gz",
+			"binary": "spf",
+			"url": "https://api.github.com/repos/yorukot/superfile/releases/assets/196588163",
+			"binaryHash": "9574efe41d0b607e025c24c2ffc69ad0b15757cfa4124f31a2cc2c5bd0719ea2"
+		},
+		{
+			"source": "github",
+			"owner": "vladimirvivien",
+			"repo": "ktop",
+			"tag": "v0.3.7",
+			"asset": "ktop_v0.3.7_darwin_arm64.tar.gz",
+			"binary": "ktop",
+			"url": "https://api.github.com/repos/vladimirvivien/ktop/releases/assets/182012038",
+			"binaryHash": "ab3884f5a04a35cf96b76702d536ed742e1a75a59fdc8b4a02baa219362c7724"
+		},
+		{
+			"source": "github",
+			"owner": "achristmascarl",
+			"repo": "rainfrog",
+			"tag": "v0.2.9",
+			"asset": "rainfrog-v0.2.9-aarch64-apple-darwin.tar.gz",
+			"binary": "rainfrog",
+			"url": "https://api.github.com/repos/achristmascarl/rainfrog/releases/assets/201234150",
+			"binaryHash": "48d220ad01afe2a0eca4db32bccb8c54f0b1219239cfc18e48e0ab9c6436891b"
+		},
+		{
+			"source": "github",
+			"owner": "appleboy",
+			"repo": "CodeGPT",
+			"tag": "v0.14.4",
+			"asset": "CodeGPT-0.14.4-darwin-arm64",
+			"binary": "codegpt",
+			"url": "https://api.github.com/repos/appleboy/CodeGPT/releases/assets/196428438",
+			"binaryHash": "9734e60296c88fb05bd7483cd20ca0eb47e78f4a6a608a0008193826caa7d4a4"
+		},
+		{
+			"source": "github",
+			"owner": "danielgtaylor",
+			"repo": "restish",
+			"tag": "v0.20.0",
+			"asset": "restish-0.20.0-darwin-arm64.tar.gz",
+			"binary": "restish",
+			"url": "https://api.github.com/repos/danielgtaylor/restish/releases/assets/140935037",
+			"binaryHash": "ab97945a9a628a797baddbc622f80ffaed6f884bc7b78b22c5a37333f21534fe"
+		},
+		{
+			"source": "github",
+			"owner": "jwilder",
+			"repo": "dockerize",
+			"tag": "v0.8.0",
+			"asset": "dockerize-darwin-arm64-v0.8.0.tar.gz",
+			"binary": "dockerize",
+			"url": "https://api.github.com/repos/jwilder/dockerize/releases/assets/184485130",
+			"binaryHash": "db81d95e55000b0f16daeb16e58e2dbf49c029611e4d4f7c798dcd056671bc6b"
+		},
+		{
+			"source": "github",
+			"owner": "projectdiscovery",
+			"repo": "katana",
+			"tag": "v1.1.1",
+			"asset": "katana_1.1.1_macOS_arm64.zip",
+			"binary": "katana",
+			"url": "https://api.github.com/repos/projectdiscovery/katana/releases/assets/202339762",
+			"binaryHash": "e06c1b3483d6f4553edb1a443bceac441eb3533a396bcd33a26026d6625e1891"
+		}
+	]
+}
